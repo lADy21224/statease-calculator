@@ -2113,6 +2113,126 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
+
+
+/* MOBILE HAMBURGER MENU — same StatEase UI, reorganized for phone screens */
+.mobile-menu-toggle {
+  display: none; align-items: center; justify-content: center;
+  flex: 0 0 43px; width: 43px; height: 43px; margin-left: auto; padding: 0;
+  border: 1px solid #d7e5fa; border-radius: 13px; color: #17345f;
+  background: linear-gradient(145deg, #fff, #eaf3ff);
+  box-shadow: 0 4px 12px rgba(30,64,175,.08); cursor: pointer;
+}
+.mobile-menu-toggle:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
+.menu-toggle-icon { width: 23px; height: 23px; }
+.menu-toggle-close { display: none; }
+.mobile-menu-panel { display: flex; flex: 1; min-width: 0; flex-direction: column; }
+.mobile-menu-backdrop { display: none; }
+@media (max-width: 780px) {
+  .sidebar { position: sticky; isolation: isolate; }
+  .brand { min-height: 45px; padding-bottom: 0; border: 0; }
+  .mobile-menu-toggle { display: inline-flex; }
+  .mobile-menu-panel { display: none; }
+  .sidebar.mobile-menu-open .mobile-menu-panel {
+    display: flex; position: fixed; z-index: 101;
+    top: calc(62px + env(safe-area-inset-top)); left: 0; bottom: 0;
+    width: min(320px, 82vw); max-height: calc(100dvh - 62px); overflow-y: auto;
+    padding: 14px 13px calc(18px + env(safe-area-inset-bottom));
+    border: 1px solid #dce8f8; border-left: 0; border-radius: 0 20px 20px 0;
+    background: linear-gradient(180deg, #f8fbff 0%, #eaf3ff 100%);
+    box-shadow: 18px 0 42px rgba(17,45,88,.19); animation: mobileDrawerIn .22s ease both;
+  }
+  .sidebar.mobile-menu-open .mobile-menu-backdrop {
+    display: block; position: fixed; z-index: 100;
+    inset: calc(62px + env(safe-area-inset-top)) 0 0;
+    background: rgba(15,35,65,.32); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+  }
+  .sidebar.mobile-menu-open .menu-toggle-open { display: none; }
+  .sidebar.mobile-menu-open .menu-toggle-close { display: block; }
+  .sidebar.mobile-menu-open .mobile-menu-toggle { position: relative; z-index: 102; color: #1d4ed8; background: #fff; }
+  .mobile-menu-panel .menu-label { display: block !important; margin: 4px 8px 13px; padding: 0; font-size: 11px; letter-spacing: 1.3px; }
+  .mobile-menu-panel .nav { display: flex; flex-direction: column; align-items: stretch; width: 100%; gap: 7px; padding: 0; overflow: visible; }
+  .mobile-menu-panel .nav button {
+    display: flex; width: 100%; min-height: 48px; padding: 8px 10px; gap: 10px;
+    border-radius: 12px; white-space: normal; font-size: 14px; text-align: left; transform: none;
+  }
+  .mobile-menu-panel .nav button.active { background: linear-gradient(115deg,#3b82f6,#1d4ed8); color: #fff; box-shadow: 0 7px 16px rgba(37,99,235,.2); }
+  .mobile-menu-panel .nav-icon { display: inline-grid !important; width: 32px; height: 32px; flex: 0 0 32px; border-radius: 10px; font-size: 16px; }
+  .mobile-menu-panel .nav button.active .nav-icon { background: #fff; color: #1d4ed8; }
+  .mobile-menu-panel .sidebar-bottom { display: block; margin-top: auto; padding-top: 16px; border-top: 1px solid #cbdcf3; }
+  .mobile-menu-panel .logout-button { min-height: 54px; }
+  .sidebar.mobile-menu-open { z-index: 120; }
+  body.mobile-menu-active { overflow: hidden; }
+}
+@keyframes mobileDrawerIn { from { opacity: .6; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .sidebar.mobile-menu-open .mobile-menu-panel { animation: none; } }
+
+
+
+/* ORGANIZATION TREE MOBILE GRID: 2, 3, 4 on row one; 5, 6, 7, 8 on row two */
+@media (max-width: 780px) {
+  #teamGrid.org-chart .member-grid.member-grid--three {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+  #teamGrid.org-chart .member-grid.member-grid--four {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 5px !important;
+    margin-top: 9px !important;
+  }
+  #teamGrid.org-chart .member-grid--three .member-card {
+    min-width: 0;
+    padding: 9px 4px;
+    gap: 6px;
+  }
+  #teamGrid.org-chart .member-grid--three .avatar {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+  }
+  #teamGrid.org-chart .member-grid--three .member-name {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  #teamGrid.org-chart .member-grid--three .member-role {
+    font-size: 8px;
+    padding: 4px 4px;
+  }
+  #teamGrid.org-chart .member-grid--four .member-card {
+    min-width: 0;
+    padding: 8px 3px;
+    gap: 5px;
+  }
+  #teamGrid.org-chart .member-grid--four .avatar {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+  #teamGrid.org-chart .member-grid--four .member-name {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  #teamGrid.org-chart .member-grid--four .member-role {
+    font-size: 8px;
+    line-height: 1.15;
+    padding: 4px 3px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 380px) {
+  #teamGrid.org-chart .member-grid.member-grid--three { gap: 5px !important; }
+  #teamGrid.org-chart .member-grid.member-grid--four { gap: 4px !important; }
+  #teamGrid.org-chart .member-grid--three .avatar { width: 40px; height: 40px; flex-basis: 40px; }
+  #teamGrid.org-chart .member-grid--three .member-name { font-size: 10px; }
+  #teamGrid.org-chart .member-grid--four .avatar { width: 32px; height: 32px; flex-basis: 32px; }
+  #teamGrid.org-chart .member-grid--four .member-name { font-size: 9px; }
+  #teamGrid.org-chart .member-grid--four .member-role { font-size: 7px; padding: 3px 2px; }
+}
+
 </style>
 
 </head>
@@ -2138,10 +2258,14 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
         <span>Technological Institute</span>
         <small>of the Philippines</small>
       </span>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Open navigation menu" aria-controls="mobileMenuPanel" aria-expanded="false">
+        <svg class="menu-toggle-icon menu-toggle-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg class="menu-toggle-icon menu-toggle-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+      </button>
     </div>
 
-
-
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
     <div class="menu-label">MAIN MENU</div>
 
 
@@ -2209,7 +2333,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
       </button>
 
     </div>
-
+    </div><!-- /mobile-menu-panel -->
   </aside>
 
 
@@ -2751,12 +2875,42 @@ document.querySelectorAll(".nav button").forEach(button => {
     const mainContent = document.querySelector(".main");
     if (mainContent) mainContent.scrollTo({ top: 0, behavior: "auto" });
     window.scrollTo({ top: 0, behavior: "auto" });
+    closeMobileMenu();
     saveAppState();
 
   });
 
 });
 
+
+
+
+
+/* PHONE NAVIGATION DRAWER */
+const sidebarElement = document.querySelector(".sidebar");
+const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+const mobileMenuBackdrop = document.getElementById("mobileMenuBackdrop");
+
+function closeMobileMenu() {
+  if (!sidebarElement || !mobileMenuToggle) return;
+  sidebarElement.classList.remove("mobile-menu-open");
+  document.body.classList.remove("mobile-menu-active");
+  mobileMenuToggle.setAttribute("aria-expanded", "false");
+  mobileMenuToggle.setAttribute("aria-label", "Open navigation menu");
+}
+
+if (sidebarElement && mobileMenuToggle && mobileMenuBackdrop) {
+  mobileMenuToggle.addEventListener("click", () => {
+    const willOpen = !sidebarElement.classList.contains("mobile-menu-open");
+    sidebarElement.classList.toggle("mobile-menu-open", willOpen);
+    document.body.classList.toggle("mobile-menu-active", willOpen);
+    mobileMenuToggle.setAttribute("aria-expanded", String(willOpen));
+    mobileMenuToggle.setAttribute("aria-label", willOpen ? "Close navigation menu" : "Open navigation menu");
+  });
+  mobileMenuBackdrop.addEventListener("click", closeMobileMenu);
+  document.addEventListener("keydown", event => { if (event.key === "Escape") closeMobileMenu(); });
+  window.addEventListener("resize", () => { if (window.innerWidth > 780) closeMobileMenu(); });
+}
 
 
 /* CALCULATOR */

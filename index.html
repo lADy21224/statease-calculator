@@ -251,10 +251,6 @@ body {
 
 }
 
-
-
-/* MAIN CONTENT */
-
 .main {
 
   flex: 1;
@@ -268,7 +264,6 @@ body {
 }
 
 
-
 .page {
 
   display: none;
@@ -276,7 +271,6 @@ body {
   animation: fade .2s ease;
 
 }
-
 
 
 .page.active {
@@ -472,10 +466,6 @@ body {
   color: var(--muted);
 
 }
-
-
-
-/* CARDS AND FORMS */
 
 .panel {
 
@@ -757,10 +747,6 @@ td {
 
 }
 
-
-
-/* FORMULAS */
-
 .formula-list {
 
   display: grid;
@@ -819,9 +805,6 @@ td {
 
 }
 
-
-
-/* HISTORY AND SETTINGS */
 
 .history-empty {
 
@@ -1118,11 +1101,6 @@ td {
 }
 
 
-
-
-
-/* POLISHED LIGHT-BLUE / DARK-BLUE THEME */
-
 body { background: #edf4ff; }
 
 .sidebar {
@@ -1283,8 +1261,6 @@ th { color: #315b96; background: #edf5ff; }
 
 .setting-row input[type=checkbox] { accent-color: #2563eb; }
 
-/* STYLISH LOG OUT AREA — pinned to the bottom of the sidebar */
-
 .sidebar-bottom {
 
   margin-top: auto;
@@ -1432,9 +1408,6 @@ th { color: #315b96; background: #edf5ff; }
   .page { animation: none; }
 }
 
-
-
-/* POLISHED TEAM ORGANIZATION LAYOUT */
 #teamGrid.org-chart {
   width: 100%;
   max-width: 1180px;
@@ -1640,7 +1613,6 @@ th { color: #315b96; background: #edf5ff; }
   gap: 14px;
   align-items: stretch;
 }
-/* Exact requested team pattern: members 2–4 on row one, 5–8 on row two. */
 .member-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .member-grid--four { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 14px; }
 .member-grid .member-card { min-height: 110px; padding: 14px; gap: 12px; }
@@ -1677,12 +1649,9 @@ th { color: #315b96; background: #edf5ff; }
   .member-card { transition: none; }
 }
 
-
-
-/* FORMULA POSTERS — bold, textbook-style formula cards */
 .formula-list {
   display: grid;
-  /* Wide formula posters read more like the user's reference example. */
+  
   grid-template-columns: minmax(0, 1fr);
   align-items: stretch;
   gap: 22px;
@@ -1803,9 +1772,6 @@ th { color: #315b96; background: #edf5ff; }
   .median-math { font-size: 23px; }
 }
 
-
-
-/* DASHBOARD + NAVIGATION INTERACTION EFFECTS */
 .nav button {
   position: relative;
   isolation: isolate;
@@ -2167,9 +2133,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 @keyframes mobileDrawerIn { from { opacity: .6; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .sidebar.mobile-menu-open .mobile-menu-panel { animation: none; } }
 
-
-
-/* ORGANIZATION TREE MOBILE GRID: 2, 3, 4 on row one; 5, 6, 7, 8 on row two */
 @media (max-width: 780px) {
   #teamGrid.org-chart .member-grid.member-grid--three {
     display: grid !important;
@@ -2243,9 +2206,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 <div class="app">
 
-
-
-  <!-- SIDEBAR -->
 
 <aside class="sidebar">
 
@@ -2338,13 +2298,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 
 
-  <!-- MAIN CONTENT -->
-
   <main class="main">
-
-
-
-    <!-- DASHBOARD -->
 
     <section id="dashboard" class="page active">
 
@@ -2518,10 +2472,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
     </section>
 
-
-
-    <!-- FORMULAS -->
-
     <section id="formulas" class="page">
 
       <header class="page-head">
@@ -2659,9 +2609,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
     </section>
 
 
-
-    <!-- SETTINGS -->
-
     <section id="settings" class="page">
 
       <header class="page-head">
@@ -2736,8 +2683,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 <script>
 
-/* EDIT YOUR 8 TEAM MEMBERS HERE */
-
 const TEAM_MEMBERS = [
 
   {
@@ -2784,10 +2729,6 @@ const TEAM_MEMBERS = [
 },
 
 ];
-
-
-
-/* PROFILE ICON */
 
 const personSvg = `
 
@@ -2843,7 +2784,6 @@ function makeMemberCard(member, isLeader = false) {
   return card;
 }
 
-// Clear the chart container and rebuild a clean hierarchy: leader first, team below.
 teamGrid.replaceChildren();
 const leaderWrap = document.createElement("div");
 leaderWrap.className = "leader-wrap";
@@ -2863,7 +2803,6 @@ membersCount.textContent = (TEAM_MEMBERS.length - 1) + " members";
 membersHeading.append(membersTitle, membersCount);
 membersArea.appendChild(membersHeading);
 
-// Keep the requested visual rows: 2–4 first, then 5–8 beneath them.
 const firstRow = document.createElement("div");
 firstRow.className = "member-grid member-grid--three";
 TEAM_MEMBERS.slice(1, 4).forEach(member => firstRow.appendChild(makeMemberCard(member)));
@@ -2874,9 +2813,6 @@ secondRow.className = "member-grid member-grid--four";
 TEAM_MEMBERS.slice(4, 8).forEach(member => secondRow.appendChild(makeMemberCard(member)));
 membersArea.appendChild(secondRow);
 teamGrid.appendChild(membersArea);
-
-
-/* SIDEBAR NAVIGATION */
 
 document.querySelectorAll(".nav button").forEach(button => {
 
@@ -2908,11 +2844,6 @@ document.querySelectorAll(".nav button").forEach(button => {
 
 });
 
-
-
-
-
-/* PHONE NAVIGATION DRAWER */
 const sidebarElement = document.querySelector(".sidebar");
 const mobileMenuToggle = document.getElementById("mobileMenuToggle");
 const mobileMenuBackdrop = document.getElementById("mobileMenuBackdrop");
@@ -2938,9 +2869,6 @@ if (sidebarElement && mobileMenuToggle && mobileMenuBackdrop) {
   window.addEventListener("resize", () => { if (window.innerWidth > 780) closeMobileMenu(); });
 }
 
-
-/* CALCULATOR */
-
 const dataInput = document.getElementById("dataInput");
 
 const dataType = document.getElementById("dataType");
@@ -2957,7 +2885,6 @@ dataType.addEventListener("change", () => {
 
 let historyItems = [];
 
-// Save this app's state in this browser so reloads keep the current page and work.
 const APP_STORAGE_KEY = "statease_mstip_app_state_v1";
 
 function saveAppState() {
@@ -2982,7 +2909,6 @@ function saveAppState() {
     };
     localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(state));
   } catch (error) {
-    // The calculator still works even if the browser blocks local storage.
     console.warn("StatEase could not save state in this browser.", error);
   }
 }
@@ -3006,7 +2932,6 @@ function restoreAppState() {
       document.getElementById("showFrequencySetting").checked = state.showFrequency;
     }
 
-    // Return to the same section the user was viewing before reloading.
     const targetPage = document.getElementById(state.currentPage);
     if (targetPage && targetPage.classList.contains("page")) {
       document.querySelectorAll(".page").forEach(page => {
@@ -3341,10 +3266,6 @@ function calculate() {
 
     document.getElementById("showSolutionSetting").checked ? "" : "none";
 
-
-
-  /* FREQUENCY TABLE */
-
   document.getElementById("frequencyTable").innerHTML =
 
     [...pairs].sort((a, b) => a.value - b.value).map(pair => `
@@ -3385,10 +3306,6 @@ function calculate() {
   saveAppState();
 
 }
-
-
-
-/* HISTORY */
 
 function escapeHTML(text) {
 
@@ -3461,9 +3378,6 @@ function renderHistory() {
 }
 
 
-
-/* BUTTONS */
-
 document.getElementById("calculateBtn")
 
   .addEventListener("click", calculate);
@@ -3528,7 +3442,6 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 dataInput.addEventListener("input", saveAppState);
 document.getElementById("rounding").addEventListener("change", saveAppState);
 
-// Apply the stored state only after every element and event listener exists.
 restoreAppState();
 
 </script>

@@ -3166,10 +3166,6 @@ function calculate() {
 
     : modes.map(value => formatNumber(value, places)).join(", ");
 
-
-
-  /* SHOW RESULTS */
-
   document.getElementById("results").innerHTML = [
 
     ["Mean", formatNumber(mean, places), "Sum ÷ number of values"],
@@ -3429,9 +3425,6 @@ document.getElementById("editTeamBtn").addEventListener("click", () => {
 
 });
 
-
-
-/* LOG OUT BUTTON */
 
 document.getElementById("logoutBtn").addEventListener("click", () => {
   const confirmLogout = confirm("Are you sure you want to log out?");

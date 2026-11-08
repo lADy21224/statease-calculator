@@ -2914,3 +2914,119 @@ tbody tr:hover { background: #eef5fd; }
 .preview-steps-content { padding:0 17px 17px; color:#526b89; font-size:12px; line-height:1.8; overflow-wrap:anywhere; }
 .history-preview-footer { padding:0 28px 22px; }
 @media(max-width:600px) { .history-preview-body { padding:16px; } .history-preview-header { padding:18px 17px 15px; } .history-preview-footer { padding:0 17px 17px; } .history-preview-stats { grid-template-columns:repeat(2,minmax(0,1fr)); } .preview-section { padding:13px; } }
+
+
+/* MOBILE HAMBURGER NAVIGATION */
+.mobile-menu-toggle { display: none; }
+@media (max-width: 780px) {
+  .sidebar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: 100vh;
+    overflow: visible !important;
+    padding: 12px 16px !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid #d7e4f3 !important;
+    border-radius: 0 0 16px 16px;
+  }
+  .mobile-menu-toggle {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    border: 1px solid #d2dfef;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(23,54,95,.08);
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .mobile-menu-toggle span {
+    display: block;
+    width: 19px;
+    height: 2px;
+    border-radius: 2px;
+    background: #294d7c;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .sidebar.is-open .mobile-menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .sidebar.is-open .mobile-menu-toggle span:nth-child(2) { opacity: 0; }
+  .sidebar.is-open .mobile-menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .brand {
+    min-height: 44px;
+    padding: 0 58px 0 2px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    align-items: center;
+  }
+  .brand-name { font-size: 10px; line-height: 1.25; }
+  .brand-name small { font-size: 9px; }
+  .menu-label, .sidebar-note { display: none; }
+  .sidebar .nav {
+    display: none !important;
+    flex-direction: column !important;
+    overflow: visible !important;
+    gap: 6px !important;
+    padding: 15px 0 5px !important;
+    margin-top: 12px;
+    border-top: 1px solid #dce7f4;
+  }
+  .sidebar.is-open .nav { display: flex !important; }
+  .sidebar .nav button {
+    width: 100%;
+    min-height: 46px;
+    justify-content: flex-start;
+    padding: 9px 12px !important;
+    white-space: normal;
+  }
+  .sidebar-bottom { display: none; margin-top: 8px !important; padding-top: 12px !important; }
+  .sidebar.is-open .sidebar-bottom { display: block; }
+  .sidebar.is-open { box-shadow: 0 12px 28px rgba(23,54,95,.15) !important; }
+  .main { padding-top: 18px; }
+}
+@media (min-width: 781px) { .mobile-menu-toggle { display: none !important; } }
+
+
+/* FINAL MOBILE LAYOUT OVERRIDES — compact header + hamburger menu */
+@media screen and (max-width: 780px) {
+  html, body { width:100%; min-width:0; overflow-x:hidden !important; }
+  .app { display:block !important; width:100%; min-height:100vh; overflow-x:clip; }
+  .sidebar { position:sticky !important; top:0 !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; display:block !important; padding:12px 16px !important; overflow:visible !important; border:0 !important; border-bottom:1px solid #d7e4f3 !important; border-radius:0 0 16px 16px !important; z-index:10000 !important; }
+  .mobile-menu-toggle { display:flex !important; position:absolute !important; top:12px !important; right:16px !important; z-index:10002 !important; width:44px !important; height:44px !important; align-items:center !important; justify-content:center !important; flex-direction:column !important; gap:5px !important; border:1px solid #d2dfef !important; border-radius:12px !important; background:#fff !important; box-shadow:0 4px 12px rgba(23,54,95,.10) !important; cursor:pointer !important; pointer-events:auto !important; }
+  .mobile-menu-toggle span { display:block !important; width:20px !important; height:2px !important; background:#294d7c !important; border-radius:2px !important; }
+  .brand { display:flex !important; min-height:46px !important; padding:0 60px 0 2px !important; margin:0 !important; border:0 !important; gap:10px !important; }
+  .brand-icon { width:40px !important; height:40px !important; flex:0 0 40px !important; }
+  .brand-name { font-size:11px !important; line-height:1.25 !important; }
+  .brand-name small { font-size:9px !important; }
+  .menu-label,.sidebar-note { display:none !important; }
+  .sidebar .nav { display:none !important; flex-direction:column !important; width:100% !important; gap:7px !important; margin:12px 0 0 !important; padding:12px 0 0 !important; overflow:visible !important; border-top:1px solid #dce7f4 !important; }
+  .sidebar.is-open .nav { display:flex !important; }
+  .sidebar .nav button { display:flex !important; width:100% !important; min-height:46px !important; justify-content:flex-start !important; white-space:normal !important; padding:8px 12px !important; }
+  .sidebar-bottom { display:none !important; margin:8px 0 0 !important; padding:10px 0 0 !important; }
+  .sidebar.is-open .sidebar-bottom { display:block !important; }
+  .main { width:100% !important; height:auto !important; min-width:0 !important; margin:0 !important; padding:16px 14px 28px !important; overflow:visible !important; }
+  .page { width:100% !important; min-width:0 !important; }
+  .page-head { margin:0 0 18px !important; padding:20px 18px !important; border-radius:18px !important; }
+  .page-head h1 { font-size:clamp(23px,6vw,30px) !important; line-height:1.2 !important; }
+  .page-head p { font-size:14px !important; line-height:1.55 !important; }
+  .panel,.formula,.limitations-panel { max-width:100% !important; min-width:0 !important; margin-left:0 !important; margin-right:0 !important; }
+  .formula-poster-equation { max-width:100% !important; overflow-x:auto !important; }
+  .formula-poster-caption,.formula-poster-note { overflow-wrap:anywhere; }
+  .calculator-tools-grid,.form-row { grid-template-columns:minmax(0,1fr) !important; }
+  .calculator-actions { display:grid !important; grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important; gap:9px !important; }
+  .calculator-actions .btn { width:100% !important; min-width:0 !important; padding-left:8px !important; padding-right:8px !important; }
+  .table-wrap { max-width:100% !important; overflow-x:auto !important; }
+}
+@media screen and (max-width:420px) { .main { padding-left:12px !important; padding-right:12px !important; } .page-head { padding:18px 16px !important; } .formula-poster-title { font-size:19px !important; } .formula-poster-equation { padding-left:8px !important; padding-right:8px !important; } }

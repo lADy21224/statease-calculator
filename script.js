@@ -206,7 +206,32 @@ membersArea.appendChild(secondRow);
 teamGrid.appendChild(membersArea);
 
 
-/* SIDEBAR NAVIGATION */
+/* SIDEBAR NAVIGATION + MOBILE MENU */
+
+const appSidebar = document.getElementById("appSidebar");
+const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+
+function setMobileMenuOpen(open) {
+  if (!appSidebar || !mobileMenuToggle) return;
+  appSidebar.classList.toggle("is-open", open);
+  mobileMenuToggle.setAttribute("aria-expanded", String(open));
+  mobileMenuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+}
+
+if (mobileMenuToggle) {
+  mobileMenuToggle.addEventListener("click", () => {
+    const isOpen = appSidebar && appSidebar.classList.contains("is-open");
+    setMobileMenuOpen(!isOpen);
+  });
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") setMobileMenuOpen(false);
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 780) setMobileMenuOpen(false);
+});
 
 document.querySelectorAll(".nav button").forEach(button => {
 
@@ -231,6 +256,7 @@ document.querySelectorAll(".nav button").forEach(button => {
     const mainContent = document.querySelector(".main");
     if (mainContent) mainContent.scrollTo({ top: 0, behavior: "auto" });
     window.scrollTo({ top: 0, behavior: "auto" });
+    setMobileMenuOpen(false);
 
   });
 

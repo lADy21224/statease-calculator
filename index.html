@@ -6,2197 +6,13 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MSTIP | Central Tendency Calculator</title>
+<title>StatEase | Central Tendency Calculator</title>
 
 
 
-<style>
-
-:root {
-
-  --pink: #2563eb;
-
-  --pink-dark: #1d4ed8;
-
-  --pink-soft: #eaf3ff;
-
-  --violet: #dbeafe;
-
-  --ink: #172b4d;
-
-  --muted: #64748b;
-
-  --paper: #f7fbff;
-
-  --line: #d7e6f8;
-
-}
-
-
-
-* { box-sizing: border-box; }
-
-
-
-body {
-
-  margin: 0;
-
-  font-family: "Segoe UI", Arial, sans-serif;
-
-  background: #eef5ff;
-
-  color: var(--ink);
-
-}
-
-
-
-.app {
-
-  display: flex;
-
-  min-height: 100vh;
-
-}
-
-
-
-/* SIDEBAR */
-
-.sidebar {
-
-  width: 270px;
-
-  background: var(--pink-soft);
-
-  padding: 26px 18px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  flex-shrink: 0;
-
-  border-right: 1px solid var(--line);
-
-}
-
-
-
-.brand {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 11px;
-
-  padding: 0 8px 24px;
-
-  border-bottom: 1px solid #cbdcf3;
-
-  font-size: 21px;
-
-  font-weight: 800;
-
-}
-
-
-
-.brand-name {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 11px;
-  line-height: 1.35;
-  font-weight: 800;
-  letter-spacing: .1px;
-}
-.brand-name small {
-  font-size: 10px;
-  line-height: 1.3;
-  font-weight: 600;
-  color: #5476a6;
-}
-
-.brand-icon {
-
-  width: 40px;
-
-  height: 40px;
-
-  border-radius: 12px;
-
-  background: var(--pink);
-
-  color: white;
-
-  display: grid;
-
-  place-items: center;
-
-  font-size: 22px;
-
-}
-
-
-
-.menu-label {
-
-  font-size: 12px;
-
-  letter-spacing: 1.3px;
-
-  color: #5476a6;
-
-  margin: 26px 9px 12px;
-
-  font-weight: 700;
-
-}
-
-
-
-.nav {
-
-  display: grid;
-
-  gap: 7px;
-
-}
-
-
-
-.nav button {
-
-  border: 0;
-
-  background: transparent;
-
-  color: #35547f;
-
-  text-align: left;
-
-  padding: 13px 12px;
-
-  border-radius: 11px;
-
-  font-size: 15px;
-
-  display: flex;
-
-  gap: 12px;
-
-  align-items: center;
-
-  cursor: pointer;
-
-}
-
-
-
-.nav button:hover {
-
-  background: #dbeafe;
-
-}
-
-
-
-.nav button.active {
-
-  background: var(--pink);
-
-  color: white;
-
-  font-weight: 700;
-
-}
-
-
-
-.nav-icon {
-
-  width: 19px;
-
-  text-align: center;
-
-  font-size: 17px;
-
-}
-
-
-
-.sidebar-note {
-
-  margin-top: auto;
-
-  background: #fff8fc;
-
-  border: 1px solid var(--line);
-
-  padding: 14px;
-
-  border-radius: 14px;
-
-  color: #59769d;
-
-  font-size: 12px;
-
-  line-height: 1.6;
-
-}
-
-.main {
-
-  flex: 1;
-
-  min-width: 0;
-
-  padding: 30px clamp(18px, 4vw, 48px);
-
-  background: var(--paper);
-
-}
-
-
-.page {
-
-  display: none;
-
-  animation: fade .2s ease;
-
-}
-
-
-.page.active {
-
-  display: block;
-
-}
-
-
-
-@keyframes fade {
-
-  from {
-
-    opacity: .4;
-
-    transform: translateY(3px);
-
-  }
-
-  to {
-
-    opacity: 1;
-
-    transform: none;
-
-  }
-
-}
-
-
-
-.page-head {
-
-  margin-bottom: 22px;
-
-}
-
-
-
-.page-head h1 {
-
-  font-size: 27px;
-
-  margin: 0 0 8px;
-
-  color: #17345f;
-
-}
-
-
-
-.page-head p {
-
-  margin: 0;
-
-  color: var(--muted);
-
-  font-size: 14px;
-
-  line-height: 1.6;
-
-}
-
-
-
-/* DASHBOARD: TWO MEMBERS PER ROW */
-
-.team-grid {
-
-  display: grid;
-
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  gap: 16px;
-
-}
-
-
-
-.member-card {
-
-  background: white;
-
-  border: 1px solid var(--line);
-
-  border-radius: 17px;
-
-  min-height: 178px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  padding: 20px 14px;
-
-  text-align: center;
-
-  box-shadow: 0 4px 15px rgba(124, 57, 94, .035);
-
-  transition: .2s;
-
-}
-
-
-
-.member-card:hover {
-
-  transform: translateY(-3px);
-
-  box-shadow: 0 8px 22px rgba(124, 57, 94, .09);
-
-}
-
-
-
-.avatar {
-
-  width: 66px;
-
-  height: 66px;
-
-  border-radius: 50%;
-
-  display: grid;
-
-  place-items: center;
-
-  margin-bottom: 12px;
-
-  color: #1d4ed8;
-
-  background: #dbeafe;
-
-}
-
-
-
-.avatar svg {
-
-  width: 31px;
-
-  height: 31px;
-
-}
-
-
-
-.member-card:nth-child(4n+2) .avatar {
-
-  background: var(--violet);
-
-}
-
-
-
-.member-card:nth-child(4n+3) .avatar {
-
-  background: #e0f2fe;
-
-}
-
-
-
-.member-card:nth-child(4n) .avatar {
-
-  background: #e0eaff;
-
-}
-
-
-
-.member-name {
-
-  font-weight: 700;
-
-  font-size: 16px;
-
-  margin-bottom: 6px;
-
-}
-
-
-
-.member-role {
-
-  font-size: 13px;
-
-  color: var(--muted);
-
-}
-
-.panel {
-
-  background: white;
-
-  border: 1px solid var(--line);
-
-  border-radius: 17px;
-
-  padding: 23px;
-
-  margin-bottom: 18px;
-
-  box-shadow: 0 4px 15px rgba(124, 57, 94, .035);
-
-}
-
-
-
-.panel h2 {
-
-  font-size: 18px;
-
-  margin: 0 0 17px;
-
-}
-
-
-
-.form-row {
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 16px;
-
-}
-
-
-
-.field {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 8px;
-
-  margin-bottom: 16px;
-
-}
-
-
-
-.field label {
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  color: #35547f;
-
-}
-
-
-
-.field input,
-
-.field textarea,
-
-.field select {
-
-  width: 100%;
-
-  border: 1px solid #cbdcf3;
-
-  border-radius: 10px;
-
-  padding: 12px 13px;
-
-  background: #f8fbff;
-
-  color: var(--ink);
-
-  font: inherit;
-
-  outline: none;
-
-}
-
-
-
-.field input:focus,
-
-.field textarea:focus,
-
-.field select:focus {
-
-  border-color: var(--pink);
-
-  box-shadow: 0 0 0 3px #dbeafe;
-
-}
-
-
-
-.field textarea {
-
-  min-height: 115px;
-
-  resize: vertical;
-
-}
-
-
-
-.hint {
-
-  font-size: 12px;
-
-  color: var(--muted);
-
-}
-
-
-
-.btn {
-
-  border: 0;
-
-  border-radius: 10px;
-
-  background: var(--pink);
-
-  color: white;
-
-  font-weight: 700;
-
-  padding: 12px 18px;
-
-  cursor: pointer;
-
-  font-size: 14px;
-
-}
-
-
-
-.btn:hover {
-
-  background: var(--pink-dark);
-
-}
-
-
-
-.btn.secondary {
-
-  background: #e0ecff;
-
-  color: #2455a6;
-
-}
-
-
-
-/* CALCULATOR RESULTS */
-
-.results {
-
-  display: grid;
-
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  gap: 12px;
-
-}
-
-
-
-.result-card {
-
-  border-radius: 13px;
-
-  background: #f1f7ff;
-
-  border: 1px solid var(--line);
-
-  padding: 17px;
-
-}
-
-
-
-.result-card span {
-
-  font-size: 12px;
-
-  color: var(--muted);
-
-  display: block;
-
-  margin-bottom: 8px;
-
-}
-
-
-
-.result-card strong {
-
-  font-size: 24px;
-
-  color: var(--pink-dark);
-
-  overflow-wrap: anywhere;
-
-}
-
-
-
-.result-card p {
-
-  font-size: 12px;
-
-  color: var(--muted);
-
-  margin: 7px 0 0;
-
-}
-
-
-
-.table-wrap {
-
-  overflow: auto;
-
-}
-
-
-
-table {
-
-  width: 100%;
-
-  border-collapse: collapse;
-
-  font-size: 13px;
-
-}
-
-
-
-th, td {
-
-  padding: 11px 12px;
-
-  border-bottom: 1px solid #e1ebf8;
-
-  text-align: left;
-
-}
-
-
-
-th {
-
-  color: #355b91;
-
-  background: #fff7fb;
-
-}
-
-
-
-td {
-
-  color: #29466f;
-
-}
-
-.formula-list {
-
-  display: grid;
-
-  gap: 13px;
-
-}
-
-
-
-.formula {
-
-  border: 1px solid var(--line);
-
-  border-radius: 13px;
-
-  padding: 17px;
-
-  background: #f8fbff;
-
-}
-
-
-
-.formula h3 {
-
-  margin: 0 0 7px;
-
-  font-size: 15px;
-
-}
-
-
-
-.formula code {
-
-  font-size: 14px;
-
-  color: var(--pink-dark);
-
-  white-space: normal;
-
-}
-
-
-
-.formula p {
-
-  margin: 8px 0 0;
-
-  color: var(--muted);
-
-  font-size: 13px;
-
-  line-height: 1.6;
-
-}
-
-
-.history-empty {
-
-  color: var(--muted);
-
-  font-size: 14px;
-
-}
-
-
-
-.history-item {
-
-  border-bottom: 1px solid #e1ebf8;
-
-  padding: 14px 0;
-
-}
-
-
-
-.history-item:last-child {
-
-  border: 0;
-
-}
-
-
-
-.history-item strong {
-
-  display: block;
-
-  margin-bottom: 5px;
-
-}
-
-
-
-.history-item small {
-
-  color: var(--muted);
-
-}
-
-
-
-.setting-row {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 15px;
-
-  padding: 15px 0;
-
-  border-bottom: 1px solid #e1ebf8;
-
-}
-
-
-
-.setting-row:last-child {
-
-  border: 0;
-
-}
-
-
-
-.setting-row p {
-
-  margin: 5px 0 0;
-
-  font-size: 13px;
-
-  color: var(--muted);
-
-}
-
-
-
-.setting-row input[type=checkbox] {
-
-  accent-color: var(--pink);
-
-  width: 18px;
-
-  height: 18px;
-
-}
-
-
-
-/* RESPONSIVE DESIGN */
-
-@media (max-width: 780px) {
-
-  .app {
-
-    display: block;
-
-  }
-
-
-
-  .sidebar {
-
-    width: 100%;
-
-    padding: 12px 14px;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 5;
-
-    border-right: 0;
-
-    border-bottom: 1px solid var(--line);
-
-  }
-
-
-
-  .brand {
-
-    padding: 0 3px 10px;
-
-    border: 0;
-
-    font-size: 19px;
-
-  }
-
-
-
-  .brand-icon {
-
-    width: 34px;
-
-    height: 34px;
-
-  }
-
-
-
-  .menu-label,
-
-  .sidebar-note {
-
-    display: none;
-
-  }
-
-
-
-  .nav {
-
-    display: flex;
-
-    overflow-x: auto;
-
-    gap: 5px;
-
-    padding-top: 4px;
-
-  }
-
-
-
-  .nav button {
-
-    white-space: nowrap;
-
-    padding: 10px;
-
-    font-size: 13px;
-
-    gap: 7px;
-
-  }
-
-
-
-  .main {
-
-    padding: 22px 15px;
-
-  }
-
-
-
-  .page-head h1 {
-
-    font-size: 24px;
-
-  }
-
-
-
-  .member-card {
-
-    min-height: 155px;
-
-    padding: 15px 8px;
-
-  }
-
-
-
-  .avatar {
-
-    width: 57px;
-
-    height: 57px;
-
-  }
-
-
-
-  .results,
-
-  .form-row {
-
-    grid-template-columns: 1fr;
-
-  }
-
-
-
-  .panel {
-
-    padding: 17px;
-
-  }
-
-}
-
-
-
-@media (max-width: 420px) {
-
-  .team-grid {
-
-    gap: 10px;
-
-  }
-
-
-
-  .member-card {
-
-    min-height: 148px;
-
-  }
-
-
-
-  .member-name {
-
-    font-size: 14px;
-
-  }
-
-
-
-  .member-role {
-
-    font-size: 12px;
-
-  }
-
-
-
-  .nav button {
-
-    padding: 9px 8px;
-
-  }
-
-
-
-  .nav-icon {
-
-    display: none;
-
-  }
-
-}
-
-
-body { background: #edf4ff; }
-
-.sidebar {
-
-  background: linear-gradient(180deg, #f5f9ff 0%, #e7f0ff 100%);
-
-  box-shadow: 8px 0 28px rgba(30, 64, 175, .045);
-
-  min-height: 100vh;
-
-}
-
-.brand { color: #17345f; }
-
-.brand-icon {
-
-  background: linear-gradient(135deg, #60a5fa, #1d4ed8);
-
-  border-radius: 14px;
-
-  box-shadow: 0 8px 18px rgba(37, 99, 235, .22);
-
-}
-
-.nav button {
-
-  transition: background .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
-
-  font-weight: 600;
-
-}
-
-.nav button:hover { background: #dbeafe; transform: translateX(2px); }
-
-.nav button.active {
-
-  background: linear-gradient(115deg, #3b82f6, #1d4ed8);
-
-  color: #fff;
-
-  box-shadow: 0 8px 18px rgba(37, 99, 235, .2);
-
-}
-
-.sidebar-note {
-
-  background: rgba(255,255,255,.78);
-
-  border-color: #cbdcf3;
-
-  box-shadow: 0 8px 20px rgba(30, 64, 175, .045);
-
-}
-
-.main {
-
-  background: radial-gradient(ellipse at top right, rgba(191,219,254,.35), transparent 38%), #f8fbff;
-
-}
-
-.page-head {
-
-  padding: 22px 24px;
-
-  border: 1px solid #dce9fb;
-
-  border-radius: 20px;
-
-  background: linear-gradient(120deg, #e7f1ff 0%, #f8fbff 58%, #dbeafe 100%);
-
-  box-shadow: 0 10px 28px rgba(30, 64, 175, .055);
-
-  position: relative;
-
-  overflow: hidden;
-
-}
-
-.page-head:after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 170px; height: 170px;
-
-  border: 1px solid rgba(59,130,246,.14);
-
-  border-radius: 50%;
-
-  right: -48px; top: -86px;
-
-  box-shadow: 0 0 0 20px rgba(59,130,246,.035), 0 0 0 42px rgba(59,130,246,.025);
-
-  pointer-events: none;
-
-}
-
-.page-head h1 { color: #17345f; letter-spacing: -.4px; }
-
-.page-head p { color: #5c7395; }
-
-.member-card, .panel {
-
-  border-color: #dce8f8;
-
-  box-shadow: 0 8px 24px rgba(30, 64, 175, .055);
-
-  transition: transform .2s ease, box-shadow .2s ease;
-
-}
-
-.member-card { background: linear-gradient(145deg, #fff 0%, #f2f7ff 100%); }
-
-.member-card:hover, .panel:hover {
-
-  box-shadow: 0 13px 30px rgba(30, 64, 175, .10);
-
-}
-
-.avatar {
-
-  background: linear-gradient(145deg, #dbeafe, #bfdbfe);
-
-  color: #1d4ed8;
-
-  box-shadow: inset 0 0 0 1px rgba(37,99,235,.08);
-
-}
-
-.member-name { color: #17345f; }
-
-.member-role { color: #6b7f9d; }
-
-.btn {
-
-  background: linear-gradient(120deg, #3b82f6, #1d4ed8);
-
-  box-shadow: 0 6px 14px rgba(37, 99, 235, .16);
-
-  transition: transform .2s ease, box-shadow .2s ease;
-
-}
-
-.btn:hover { background: linear-gradient(120deg, #2563eb, #1e40af); transform: translateY(-1px); }
-
-.btn.secondary { background: #e4efff; color: #1d4ed8; box-shadow: none; }
-
-.btn.secondary:hover { background: #d5e6ff; }
-
-.result-card { background: linear-gradient(145deg, #f7fbff, #eaf3ff); border-color: #d5e5fa; }
-
-.result-card strong, .formula code { color: #1d4ed8; }
-
-.formula { background: linear-gradient(145deg, #fff, #f5f9ff); }
-
-th { color: #315b96; background: #edf5ff; }
-
-.setting-row input[type=checkbox] { accent-color: #2563eb; }
-
-.sidebar-bottom {
-
-  margin-top: auto;
-
-  padding: 18px 0 2px;
-
-  border-top: 1px solid #cbdcf3;
-
-}
-
-.logout-button {
-
-  width: 100%;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 12px 13px;
-
-  border: 1px solid #d7e5fa;
-
-  border-radius: 15px;
-
-  background: linear-gradient(135deg, rgba(255,255,255,.98), #edf5ff);
-
-  color: #244574;
-
-  text-align: left;
-
-  cursor: pointer;
-
-  box-shadow: 0 5px 14px rgba(30,64,175,.07);
-
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-
-}
-
-.logout-button:hover {
-
-  transform: translateY(-2px);
-
-  border-color: #93baf4;
-
-  background: linear-gradient(135deg, #eff6ff, #dbeafe);
-
-  box-shadow: 0 9px 20px rgba(37,99,235,.14);
-
-}
-
-.logout-button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
-
-.logout-icon {
-
-  width: 42px;
-
-  height: 42px;
-
-  flex: 0 0 42px;
-
-  display: grid;
-
-  place-items: center;
-
-  border-radius: 12px;
-
-  color: #fff;
-
-  background: linear-gradient(145deg, #60a5fa, #1d4ed8);
-
-  box-shadow: 0 5px 12px rgba(37,99,235,.23);
-
-}
-
-.logout-icon svg { width: 21px; height: 21px; }
-
-.logout-copy { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 3px; }
-
-.logout-copy strong { font-size: 14px; font-weight: 750; color: #17345f; }
-
-.logout-copy small { font-size: 11px; color: #6b82a4; }
-
-.logout-arrow { color: #5b83bf; font-size: 25px; line-height: 1; transition: transform .2s ease; }
-
-.logout-button:hover .logout-arrow { transform: translateX(3px); }
-
-@media (max-width: 780px) {
-
-  .sidebar-bottom { margin-top: 10px; padding-top: 12px; }
-
-  .logout-button { max-width: 100%; }
-
-}
-
-@media (max-width: 780px) {
-
-  .sidebar { min-height: auto; }
-
-  .page-head { padding: 19px; }
-
-  .page-head:after { width: 110px; height: 110px; }
-
-}
-
-
-
-
-/* FIXED DASHBOARD LAYOUT: sidebar stays still, only the selected page scrolls */
-@media (min-width: 781px) {
-  html, body { height: 100%; overflow: hidden; }
-  .app { height: 100vh; min-height: 0; }
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    width: 270px;
-    height: 100vh;
-    min-height: 0;
-    overflow-y: auto;
-    box-sizing: border-box;
-    z-index: 20;
-  }
-  .main {
-    margin-left: 270px;
-    width: calc(100% - 270px);
-    height: 100vh;
-    box-sizing: border-box;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    scroll-behavior: smooth;
-  }
-  .page { animation: none; }
-}
-
-@media (max-width: 780px) {
-  .app { display: block; min-height: 100vh; }
-  .sidebar {
-    position: sticky; top: 0;
-    width: 100%; height: auto; min-height: auto;
-    max-height: none; overflow: visible;
-    box-sizing: border-box;
-  }
-  .main { width: 100%; height: auto; overflow: visible; }
-  .page { animation: none; }
-}
-
-#teamGrid.org-chart {
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  display: block;
-  position: relative;
-}
-.page-head {
-  margin-bottom: 28px;
-  padding: 26px 30px;
-  border: 1px solid #d7e6fb;
-  border-radius: 22px;
-  background: linear-gradient(112deg, #e8f2ff 0%, #f8fbff 65%, #dceaff 100%);
-  box-shadow: 0 12px 28px rgba(37, 99, 235, .055);
-}
-.page-head h1 {
-  font-size: clamp(27px, 3vw, 34px);
-  letter-spacing: -.8px;
-  line-height: 1.15;
-  margin-bottom: 8px;
-}
-.page-head p { max-width: 640px; font-size: 14px; line-height: 1.7; }
-.leader-wrap {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  padding-bottom: 32px;
-}
-.leader-wrap::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  height: 32px;
-  width: 2px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(#93bdf8, #c7dcfb);
-}
-.member-card {
-  box-sizing: border-box;
-  min-width: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
-  padding: 16px;
-  min-height: 118px;
-  text-align: left;
-  border: 1px solid #e0eaf8;
-  border-radius: 17px;
-  background: #fff;
-  box-shadow: 0 5px 16px rgba(29, 78, 216, .045);
-  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
-}
-.member-card:hover {
-  transform: translateY(-2px);
-  border-color: #a7c7f8;
-  box-shadow: 0 12px 24px rgba(29, 78, 216, .095);
-}
-.member-card.leader-card {
-  width: min(100%, 560px);
-  min-height: 158px;
-  gap: 22px;
-  padding: 22px 25px;
-  border: 1px solid #a9cafa;
-  border-radius: 22px;
-  background: linear-gradient(130deg, #ffffff 0%, #f0f6ff 58%, #e3efff 100%);
-  box-shadow: 0 15px 34px rgba(37, 99, 235, .12);
-  position: relative;
-  overflow: hidden;
-}
-.member-card.leader-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 20px;
-  bottom: 20px;
-  width: 5px;
-  border-radius: 0 6px 6px 0;
-  background: linear-gradient(#60a5fa, #1d4ed8);
-}
-.avatar {
-  width: 70px;
-  height: 70px;
-  flex: 0 0 70px;
-  margin: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 12px;
-  color: #2563eb;
-  background: linear-gradient(145deg, #e2edff, #cfe1ff);
-  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, .07);
-}
-.avatar svg { width: 29px; height: 29px; }
-.avatar img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 35%;
-  border-radius: 0 !important;
-}
-.member-info {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 7px;
-}
-.member-name {
-  color: #18365f;
-  font-size: 14px;
-  font-weight: 750;
-  line-height: 1.35;
-  margin: 0;
-  text-align: left;
-  overflow-wrap: anywhere;
-}
-.member-role {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 10px;
-  border-radius: 7px;
-  color: #436386;
-  background: #edf4ff;
-  border: 1px solid #dce9fc;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-.leader-card .avatar {
-  width: 112px;
-  height: 112px;
-  flex-basis: 112px;
-  border-radius: 13px;
-  border: 4px solid #fff;
-  box-shadow: 0 6px 17px rgba(30, 64, 175, .15);
-}
-.leader-card .member-info { gap: 9px; }
-.leader-card .member-name { font-size: clamp(19px, 2vw, 24px); letter-spacing: -.4px; }
-.leader-card .member-role {
-  color: #fff;
-  background: linear-gradient(110deg, #3b82f6, #1d4ed8);
-  border: 0;
-  border-radius: 8px;
-  padding: 7px 11px;
-  font-size: 11px;
-  letter-spacing: .2px;
-  text-transform: uppercase;
-}
-.leader-kicker {
-  margin: 0 0 1px;
-  color: #6482a8;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.35px;
-  text-transform: uppercase;
-}
-.members-area {
-  border-top: 1px solid #dce8f8;
-  padding-top: 22px;
-}
-.members-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0 0 16px;
-}
-.members-heading strong {
-  color: #24466f;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1.15px;
-  text-transform: uppercase;
-}
-.members-count {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid #d9e7fb;
-  background: #eff6ff;
-  color: #38679f;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 750;
-  white-space: nowrap;
-}
-.members-count::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  background: #3b82f6;
-  border-radius: 50%;
-}
-.member-grid {
-  display: grid;
-  gap: 14px;
-  align-items: stretch;
-}
-.member-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.member-grid--four { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 14px; }
-.member-grid .member-card { min-height: 110px; padding: 14px; gap: 12px; }
-.member-grid .avatar { width: 66px; height: 66px; flex-basis: 66px; border-radius: 11px; }
-.member-grid .member-name { font-size: 13px; }
-.member-grid .member-role { max-width: 100%; padding: 5px 8px; font-size: 10px; }
-@media (max-width: 1260px) {
-  .member-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .member-grid--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 780px) {
-  .page-head { padding: 22px; border-radius: 18px; }
-  #teamGrid.org-chart { max-width: none; }
-  .leader-card { max-width: 540px; }
-  .member-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .member-grid--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 540px) {
-  .main { padding: 18px 13px; }
-  .page-head { padding: 19px; margin-bottom: 20px; }
-  .page-head h1 { font-size: 25px; }
-  .leader-wrap { padding-bottom: 24px; }
-  .leader-wrap::after { height: 24px; }
-  .member-card.leader-card { min-height: 126px; gap: 14px; padding: 15px 15px 15px 19px; border-radius: 17px; }
-  .leader-card .avatar { width: 88px; height: 88px; flex-basis: 88px; }
-  .leader-card .member-name { font-size: 18px; }
-  .member-grid--three { grid-template-columns: 1fr; gap: 10px; }
-  .member-grid--four { grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
-  .member-grid .member-card { min-height: 94px; padding: 12px; }
-  .member-grid .avatar { width: 66px; height: 66px; flex-basis: 66px; }
-  .members-heading { margin-bottom: 12px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .member-card { transition: none; }
-}
-
-.formula-list {
-  display: grid;
-  
-  grid-template-columns: minmax(0, 1fr);
-  align-items: stretch;
-  gap: 22px;
-  max-width: 1120px;
-  margin-inline: auto;
-}
-.formula.formula-poster {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #d6e2f2;
-  border-radius: 18px;
-  background: #f7f7f8;
-  box-shadow: 0 8px 22px rgba(31, 58, 96, .08);
-}
-.formula-poster-title {
-  display: flex;
-  min-height: 54px;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 14px;
-  background: #123B6D;
-  color: #fff;
-  text-align: center;
-  font-size: 21px;
-  font-weight: 500;
-  letter-spacing: .2px;
-}
-.formula-poster-equation {
-  flex: 1;
-  min-height: 164px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 20px 13px;
-  color: #393939;
-  background: #fafafa;
-  font-family: "Cambria Math", Cambria, "Times New Roman", serif;
-}
-.math-symbol { font-size: clamp(38px, 3.5vw, 52px); font-style: italic; white-space: nowrap; }
-.math-equals { font-size: clamp(34px, 3vw, 46px); font-weight: 300; }
-.math-fraction {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  min-width: 108px;
-  text-align: center;
-  font-size: clamp(29px, 2.7vw, 39px);
-  line-height: 1.05;
-}
-.math-numerator { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 0 5px 5px; white-space: nowrap; }
-.sigma-wrap { display: inline-flex; position: relative; align-items: center; padding-right: 14px; }
-.sigma { font-size: 1.8em; line-height: .9; }
-.sigma-limits { display: flex; flex-direction: column; position: absolute; left: calc(100% - 10px); top: 1px; font-size: .42em; line-height: 1.1; }
-.sigma-limits sup, .sigma-limits sub { position: static; font-size: 1em; line-height: 1.05; }
-.sum-x sub { font-size: .55em; }
-.fraction-rule { height: 2px; min-height: 2px; background: #4a4a4a; margin: 0 1px; }
-.math-denominator { padding-top: 5px; font-size: .92em; }
-.formula-poster-caption { padding: 12px 16px 3px; text-align: center; color: #43536a; font-size: 12px; line-height: 1.5; }
-.formula-poster-note { margin-top: auto; padding: 9px 12px 13px; text-align: center; color: #6c7480; font-size: 11px; line-height: 1.4; }
-.median-equation {
-  box-sizing: border-box;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 26px;
-  min-height: 430px;
-  padding: 28px 30px 20px;
-  border: 3px solid #FFAD33;
-  background: #fff;
-  color: #073B6D;
-}
-.median-case { display: flex; flex-direction: column; align-items: stretch; gap: 12px; text-align: left; }
-.case-label { color: #FFAD33; font-family: Arial, sans-serif; font-size: clamp(20px, 2.3vw, 29px); font-weight: 800; letter-spacing: 0; line-height: 1.2; }
-.median-math { display: flex; align-items: center; justify-content: center; gap: 12px; color: #073B6D; font-size: clamp(28px, 3vw, 43px); font-weight: 650; white-space: nowrap; line-height: 1.25; }
-.median-math sup { font-size: .58em; align-self: flex-start; margin-left: -8px; }
-.median-math sub { font-size: .58em; }
-.median-position { display: inline-flex; align-items: center; gap: 1px; }
-.median-paren { font-size: 1.2em; font-weight: 400; }
-.small-fraction { display: inline-flex; flex-direction: column; align-items: stretch; justify-content: center; vertical-align: middle; line-height: 1.1; font-size: .9em; font-weight: 650; text-align: center; }
-.small-fraction > span:first-child { padding: 0 8px 5px; text-align: center; }
-.small-fraction > span:last-child { padding-top: 4px; text-align: center; }
-.small-fraction .fraction-rule, .median-even-fraction > .fraction-rule { display: block; width: 100%; box-sizing: border-box; background: #073B6D; height: 3px; min-height: 3px; }
-.median-even-fraction { display: inline-flex; flex-direction: column; align-items: stretch; min-width: min(70%, 640px); font-size: .88em; line-height: 1.2; }
-.median-even-numerator { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 24px); padding: 0 5px 8px; }
-.median-definition { display: flex; flex-wrap: wrap; gap: 6px 26px; color: #FFAD33; font-family: Arial, sans-serif; font-size: clamp(17px, 2vw, 25px); font-weight: 750; line-height: 1.3; }
-.median-definition i { font-weight: 800; }
-.mode-equation { gap: 11px; }
-.mode-symbol { font-size: clamp(39px, 3.5vw, 52px); white-space: nowrap; font-style: italic; }
-.mode-symbol sub { font-size: .55em; }
-.mode-definition { font-size: clamp(20px, 2vw, 27px); text-align: center; line-height: 1.35; }
-@media (max-width: 1100px) {
-  .formula-poster-equation { min-height: 145px; }
-  .math-symbol, .mode-symbol { font-size: 48px; }
-  .math-equals { font-size: 40px; }
-  .math-fraction { font-size: 36px; }
-  .mode-definition { font-size: 25px; }
-}
-@media (max-width: 650px) {
-  .median-equation { min-height: 0; gap: 24px; padding: 22px 16px 18px; }
-  .case-label { font-size: 21px; }
-  .median-math { white-space: normal; flex-wrap: wrap; gap: 8px; font-size: clamp(24px, 5.2vw, 32px); }
-  .median-even-fraction { min-width: 0; max-width: 100%; font-size: .8em; }
-  .median-even-numerator { gap: 8px; }
-  .median-definition { font-size: 17px; gap: 5px 16px; }
-}
-@media (max-width: 420px) {
-  .formula-poster-title { font-size: 19px; }
-  .formula-poster-equation { padding-left: 8px; padding-right: 8px; gap: 8px; }
-  .math-symbol, .mode-symbol { font-size: 40px; }
-  .math-equals { font-size: 32px; }
-  .math-fraction { min-width: 88px; font-size: 31px; }
-  .median-equation { padding: 18px 11px 16px; }
-  .median-math { font-size: 23px; }
-}
-
-.nav button {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  min-height: 54px;
-  transition: transform .22s ease, color .22s ease, box-shadow .22s ease, background .22s ease;
-}
-.nav button::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(115deg, #3b82f6 0%, #1d4ed8 100%);
-  transform: translateX(-102%);
-  transition: transform .28s ease;
-}
-.nav button.active::before { transform: translateX(0); }
-.nav button:hover:not(.active) {
-  transform: translateX(4px);
-  background: #dceaff;
-  box-shadow: inset 3px 0 0 #60a5fa;
-}
-.nav button.active {
-  color: #fff;
-  background: transparent;
-  box-shadow: 0 9px 20px rgba(29, 78, 216, .23);
-}
-.nav-icon {
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 34px;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: #e4efff;
-  color: #2d5b9e;
-  font-size: 16px;
-  line-height: 1;
-  transition: background .22s ease, color .22s ease, transform .22s ease, box-shadow .22s ease;
-}
-.nav-icon-dashboard {
-  font-family: "Segoe UI", Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 900;
-  letter-spacing: -.8px;
-  background: linear-gradient(145deg, #dbeafe, #bfdbfe);
-  color: #1d4ed8;
-  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, .12);
-}
-.nav button.active .nav-icon {
-  color: #1d4ed8;
-  background: #fff;
-  box-shadow: 0 4px 11px rgba(9, 35, 90, .17);
-  transform: translateY(-1px) scale(1.04);
-}
-.nav button.active .nav-icon-dashboard {
-  animation: dashboardIconPulse 2.4s ease-in-out infinite;
-}
-.nav button:active { transform: scale(.985); }
-
-#dashboard .page-head {
-  background: linear-gradient(120deg, #e5f0ff 0%, #f8fbff 48%, #d6e7ff 100%);
-  border-color: #c9dcfa;
-  box-shadow: 0 14px 32px rgba(37, 99, 235, .10);
-}
-#dashboard .page-head h1 {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 2px 0 rgba(255,255,255,.6);
-}
-#dashboard .page-head p { position: relative; z-index: 1; }
-#dashboard.page.active .page-head { animation: dashboardHeadIn .52s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .leader-card { animation: teamCardIn .55s .06s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .member-grid--three .member-card:nth-child(1) { animation: teamCardIn .48s .12s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .member-grid--three .member-card:nth-child(2) { animation: teamCardIn .48s .19s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .member-grid--three .member-card:nth-child(3) { animation: teamCardIn .48s .26s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .member-grid--four .member-card:nth-child(1) { animation: teamCardIn .48s .16s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .member-grid--four .member-card:nth-child(2) { animation: teamCardIn .48s .23s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .member-grid--four .member-card:nth-child(3) { animation: teamCardIn .48s .30s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard.page.active .member-grid--four .member-card:nth-child(4) { animation: teamCardIn .48s .37s cubic-bezier(.2,.75,.25,1) both; }
-#dashboard .member-card { will-change: transform; }
-#dashboard .leader-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(37, 99, 235, .18); }
-#dashboard .member-grid .member-card:hover .avatar { transform: scale(1.045); box-shadow: 0 7px 17px rgba(37, 99, 235, .14); }
-#dashboard .avatar { transition: transform .22s ease, box-shadow .22s ease; }
-@keyframes dashboardHeadIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes teamCardIn {
-  from { opacity: 0; transform: translateY(13px) scale(.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes dashboardIconPulse {
-  0%, 100% { box-shadow: 0 4px 11px rgba(9, 35, 90, .17); }
-  50% { box-shadow: 0 4px 14px rgba(255,255,255,.38), 0 0 0 4px rgba(191,219,254,.24); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .nav button, .nav button::before, .nav-icon, #dashboard .avatar { transition: none !important; }
-  .nav button.active .nav-icon-dashboard,
-  #dashboard.page.active .page-head,
-  #dashboard.page.active .leader-card,
-  #dashboard.page.active .member-grid .member-card { animation: none !important; }
-}
-@media (max-width: 780px) {
-  .nav button { min-height: 46px; }
-  .nav-icon { flex-basis: 30px; width: 30px; height: 30px; }
-  .nav button:hover:not(.active) { transform: translateY(-1px); }
-}
-
-
-
-/* FINAL MOBILE POLISH — iPhone, Android and small tablets */
-html { -webkit-text-size-adjust: 100%; }
-body { overflow-x: hidden; }
-img, svg, video, canvas { max-width: 100%; }
-button, input, select, textarea { font: inherit; }
-button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
-
-@media (max-width: 780px) {
-  html, body { height: auto; min-height: 100%; overflow-x: hidden; overflow-y: auto; }
-  .app { display: block; width: 100%; min-height: 100vh; min-height: 100dvh; }
-  .sidebar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    max-height: none;
-    overflow: visible;
-    padding: 10px 12px 11px;
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 7px 22px rgba(30, 64, 175, .09);
-  }
-  .brand {
-    width: 100%;
-    min-width: 0;
-    align-items: center;
-    gap: 9px;
-    padding: 0 2px 10px;
-  }
-  .brand-icon { flex: 0 0 36px; width: 36px; height: 36px; }
-  .brand-name { font-size: 11px; line-height: 1.25; }
-  .brand-name small { font-size: 10px; }
-  .menu-label, .sidebar-note { display: none !important; }
-  .nav {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 7px;
-    width: 100%;
-    padding-top: 2px;
-    overflow: visible;
-  }
-  .nav button {
-    width: 100%;
-    min-width: 0;
-    min-height: 44px;
-    white-space: normal;
-    justify-content: flex-start;
-    gap: 8px;
-    padding: 7px 9px;
-    border-radius: 11px;
-    font-size: 13px;
-    line-height: 1.2;
-    transform: none;
-  }
-  .nav-icon {
-    display: inline-grid !important;
-    flex: 0 0 29px;
-    width: 29px;
-    height: 29px;
-    font-size: 15px;
-  }
-  .nav-icon-dashboard { font-size: 19px; letter-spacing: 0; }
-  .nav button:hover:not(.active) { transform: none; }
-  .sidebar-bottom { margin-top: 9px; padding-top: 9px; }
-  .logout-button { width: 100%; min-height: 48px; padding: 7px 9px; border-radius: 12px; }
-  .logout-icon { width: 34px; height: 34px; flex-basis: 34px; border-radius: 10px; }
-  .logout-copy strong { font-size: 13px; }
-  .logout-copy small { font-size: 10px; }
-  .main {
-    width: 100%;
-    min-width: 0;
-    height: auto;
-    min-height: 0;
-    margin: 0;
-    padding: 17px 13px calc(22px + env(safe-area-inset-bottom));
-    overflow: visible;
-  }
-  .page { width: 100%; min-width: 0; }
-  .page-head {
-    padding: 19px 17px;
-    margin-bottom: 18px;
-    border-radius: 16px;
-  }
-  .page-head h1 { font-size: clamp(22px, 6vw, 27px); line-height: 1.18; overflow-wrap: anywhere; }
-  .page-head p { font-size: 13px; line-height: 1.55; }
-  .panel { width: 100%; min-width: 0; padding: 16px; margin-bottom: 14px; border-radius: 15px; }
-  .panel h2 { font-size: 17px; }
-  .form-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .field { min-width: 0; }
-  .field input, .field textarea, .field select {
-    width: 100%;
-    min-width: 0;
-    min-height: 45px;
-    font-size: 16px; /* prevents iOS Safari from zooming into inputs */
-  }
-  .field textarea { min-height: 118px; }
-  .btn { min-height: 44px; }
-  #calculateBtn, #clearBtn { display: block; width: 100%; margin: 8px 0 0; }
-  #errorMessage { overflow-wrap: anywhere; }
-  .results { grid-template-columns: minmax(0, 1fr); gap: 9px; }
-  .result-card { min-width: 0; padding: 14px; }
-  .result-card strong { font-size: clamp(21px, 6vw, 26px); }
-  #sortedData, #solution { overflow-wrap: anywhere; word-break: normal; }
-  .table-wrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .table-wrap table { min-width: 300px; }
-  .setting-row { align-items: flex-start; gap: 10px; }
-  .setting-row > div { min-width: 0; }
-  .setting-row input[type=checkbox] { flex: 0 0 20px; margin-top: 3px; }
-
-  /* Organization chart: leader first; member cards form a tidy 2-column grid. */
-  #teamGrid.org-chart { width: 100%; max-width: none; }
-  .leader-wrap { width: 100%; padding-bottom: 22px; }
-  .leader-wrap::after { height: 22px; }
-  .member-card.leader-card {
-    width: 100%;
-    max-width: 560px;
-    min-width: 0;
-    min-height: 112px;
-    gap: 12px;
-    padding: 12px 12px 12px 16px;
-  }
-  .leader-card .avatar { width: 76px; height: 76px; flex: 0 0 76px; }
-  .leader-card .member-info { min-width: 0; gap: 6px; }
-  .leader-card .member-name { font-size: clamp(16px, 4.5vw, 20px); }
-  .leader-card .member-role { font-size: 10px; padding: 6px 8px; }
-  .leader-kicker { font-size: 9px; letter-spacing: 1px; }
-  .members-area { padding-top: 16px; }
-  .members-heading { margin-bottom: 11px; }
-  .members-heading strong { font-size: 11px; }
-  .members-count { font-size: 10px; padding: 5px 8px; }
-  .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 9px; }
-  .member-grid--four { margin-top: 9px; }
-  .member-grid .member-card {
-    width: 100%;
-    min-width: 0;
-    min-height: 0;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-    padding: 12px 8px;
-    text-align: center;
-    border-radius: 13px;
-  }
-  .member-grid .avatar { width: 54px; height: 54px; flex: 0 0 54px; border-radius: 10px; }
-  .member-grid .member-info { width: 100%; align-items: center; gap: 6px; }
-  .member-grid .member-name { width: 100%; font-size: 12px; line-height: 1.3; text-align: center; overflow-wrap: anywhere; }
-  .member-grid .member-role { max-width: 100%; white-space: normal; justify-content: center; text-align: center; font-size: 9px; padding: 5px 6px; }
-
-  /* Formula posters stay inside the viewport without tiny sideways overflow. */
-  .formula-list { width: 100%; max-width: 100%; gap: 14px; }
-  .formula-poster-title { min-height: 48px; padding: 10px; font-size: 18px; }
-  .formula-poster-equation { min-width: 0; max-width: 100%; min-height: 122px; padding: 17px 8px; gap: 7px; overflow: hidden; }
-  .math-symbol, .mode-symbol { font-size: clamp(32px, 9vw, 42px); }
-  .math-equals { font-size: clamp(27px, 7vw, 34px); }
-  .math-fraction { min-width: 76px; font-size: clamp(26px, 7vw, 31px); }
-  .math-numerator { gap: 4px; padding-inline: 2px; }
-  .sigma-wrap { padding-right: 11px; }
-  .formula-poster-caption { padding: 11px 12px 3px; }
-  .formula-poster-note { padding: 8px 10px 12px; }
-  .median-equation { min-height: 0; gap: 21px; padding: 19px 12px 15px; }
-  .median-case { gap: 10px; }
-  .case-label { font-size: 19px; }
-  .median-math { max-width: 100%; white-space: normal; flex-wrap: wrap; gap: 6px; font-size: clamp(21px, 5.4vw, 28px); }
-  .median-even-fraction { min-width: 0; max-width: 100%; font-size: .72em; }
-  .median-even-numerator { flex-wrap: wrap; gap: 5px; padding: 0 1px 6px; }
-  .median-definition { font-size: 15px; gap: 5px 12px; }
-  .mode-definition { font-size: clamp(17px, 4.6vw, 22px); }
-}
-
-@media (max-width: 380px) {
-  .main { padding-left: 10px; padding-right: 10px; }
-  .sidebar { padding-left: 9px; padding-right: 9px; }
-  .nav { gap: 6px; }
-  .nav button { gap: 6px; padding: 6px 7px; font-size: 12px; }
-  .nav-icon { flex-basis: 26px; width: 26px; height: 26px; }
-  .page-head { padding: 16px 14px; }
-  .panel { padding: 13px; }
-  .member-card.leader-card { gap: 9px; padding-left: 12px; }
-  .leader-card .avatar { width: 66px; height: 66px; flex-basis: 66px; }
-  .leader-card .member-name { font-size: 16px; }
-  .member-grid { gap: 7px; }
-  .member-grid .member-card { padding: 10px 6px; }
-  .member-grid .avatar { width: 48px; height: 48px; flex-basis: 48px; }
-}
-
-@media (hover: none) {
-  .member-card:hover, .panel:hover, .logout-button:hover, .btn:hover { transform: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-}
-
-
-
-/* MOBILE HAMBURGER MENU — same StatEase UI, reorganized for phone screens */
-.mobile-menu-toggle {
-  display: none; align-items: center; justify-content: center;
-  flex: 0 0 43px; width: 43px; height: 43px; margin-left: auto; padding: 0;
-  border: 1px solid #d7e5fa; border-radius: 13px; color: #17345f;
-  background: linear-gradient(145deg, #fff, #eaf3ff);
-  box-shadow: 0 4px 12px rgba(30,64,175,.08); cursor: pointer;
-}
-.mobile-menu-toggle:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
-.menu-toggle-icon { width: 23px; height: 23px; }
-.menu-toggle-close { display: none; }
-.mobile-menu-panel { display: flex; flex: 1; min-width: 0; flex-direction: column; }
-.mobile-menu-backdrop { display: none; }
-@media (max-width: 780px) {
-  .sidebar { position: sticky; isolation: isolate; }
-  .brand { min-height: 45px; padding-bottom: 0; border: 0; }
-  .mobile-menu-toggle { display: inline-flex; }
-  .mobile-menu-panel { display: none; }
-  .sidebar.mobile-menu-open .mobile-menu-panel {
-    display: flex; position: fixed; z-index: 101;
-    top: calc(62px + env(safe-area-inset-top)); left: 0; bottom: 0;
-    width: min(320px, 82vw); max-height: calc(100dvh - 62px); overflow-y: auto;
-    padding: 14px 13px calc(18px + env(safe-area-inset-bottom));
-    border: 1px solid #dce8f8; border-left: 0; border-radius: 0 20px 20px 0;
-    background: linear-gradient(180deg, #f8fbff 0%, #eaf3ff 100%);
-    box-shadow: 18px 0 42px rgba(17,45,88,.19); animation: mobileDrawerIn .22s ease both;
-  }
-  .sidebar.mobile-menu-open .mobile-menu-backdrop {
-    display: block; position: fixed; z-index: 100;
-    inset: calc(62px + env(safe-area-inset-top)) 0 0;
-    background: rgba(15,35,65,.32); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
-  }
-  .sidebar.mobile-menu-open .menu-toggle-open { display: none; }
-  .sidebar.mobile-menu-open .menu-toggle-close { display: block; }
-  .sidebar.mobile-menu-open .mobile-menu-toggle { position: relative; z-index: 102; color: #1d4ed8; background: #fff; }
-  .mobile-menu-panel .menu-label { display: block !important; margin: 4px 8px 13px; padding: 0; font-size: 11px; letter-spacing: 1.3px; }
-  .mobile-menu-panel .nav { display: flex; flex-direction: column; align-items: stretch; width: 100%; gap: 7px; padding: 0; overflow: visible; }
-  .mobile-menu-panel .nav button {
-    display: flex; width: 100%; min-height: 48px; padding: 8px 10px; gap: 10px;
-    border-radius: 12px; white-space: normal; font-size: 14px; text-align: left; transform: none;
-  }
-  .mobile-menu-panel .nav button.active { background: linear-gradient(115deg,#3b82f6,#1d4ed8); color: #fff; box-shadow: 0 7px 16px rgba(37,99,235,.2); }
-  .mobile-menu-panel .nav-icon { display: inline-grid !important; width: 32px; height: 32px; flex: 0 0 32px; border-radius: 10px; font-size: 16px; }
-  .mobile-menu-panel .nav button.active .nav-icon { background: #fff; color: #1d4ed8; }
-  .mobile-menu-panel .sidebar-bottom { display: block; margin-top: auto; padding-top: 16px; border-top: 1px solid #cbdcf3; }
-  .mobile-menu-panel .logout-button { min-height: 54px; }
-  .sidebar.mobile-menu-open { z-index: 120; }
-  body.mobile-menu-active { overflow: hidden; }
-}
-@keyframes mobileDrawerIn { from { opacity: .6; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
-@media (prefers-reduced-motion: reduce) { .sidebar.mobile-menu-open .mobile-menu-panel { animation: none; } }
-
-@media (max-width: 780px) {
-  #teamGrid.org-chart .member-grid.member-grid--three {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 7px !important;
-  }
-  #teamGrid.org-chart .member-grid.member-grid--four {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 5px !important;
-    margin-top: 9px !important;
-  }
-  #teamGrid.org-chart .member-grid--three .member-card {
-    min-width: 0;
-    padding: 9px 4px;
-    gap: 6px;
-  }
-  #teamGrid.org-chart .member-grid--three .avatar {
-    width: 45px;
-    height: 45px;
-    flex-basis: 45px;
-  }
-  #teamGrid.org-chart .member-grid--three .member-name {
-    font-size: 11px;
-    line-height: 1.25;
-  }
-  #teamGrid.org-chart .member-grid--three .member-role {
-    font-size: 8px;
-    padding: 4px 4px;
-  }
-  #teamGrid.org-chart .member-grid--four .member-card {
-    min-width: 0;
-    padding: 8px 3px;
-    gap: 5px;
-  }
-  #teamGrid.org-chart .member-grid--four .avatar {
-    width: 38px;
-    height: 38px;
-    flex-basis: 38px;
-  }
-  #teamGrid.org-chart .member-grid--four .member-name {
-    font-size: 10px;
-    line-height: 1.2;
-  }
-  #teamGrid.org-chart .member-grid--four .member-role {
-    font-size: 8px;
-    line-height: 1.15;
-    padding: 4px 3px;
-    white-space: normal;
-    overflow-wrap: anywhere;
-  }
-}
-
-@media (max-width: 380px) {
-  #teamGrid.org-chart .member-grid.member-grid--three { gap: 5px !important; }
-  #teamGrid.org-chart .member-grid.member-grid--four { gap: 4px !important; }
-  #teamGrid.org-chart .member-grid--three .avatar { width: 40px; height: 40px; flex-basis: 40px; }
-  #teamGrid.org-chart .member-grid--three .member-name { font-size: 10px; }
-  #teamGrid.org-chart .member-grid--four .avatar { width: 32px; height: 32px; flex-basis: 32px; }
-  #teamGrid.org-chart .member-grid--four .member-name { font-size: 9px; }
-  #teamGrid.org-chart .member-grid--four .member-role { font-size: 7px; padding: 3px 2px; }
-}
-
-</style>
+<link rel="stylesheet" href="styles.css">
 
 </head>
 
@@ -2207,7 +23,14 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 <div class="app">
 
 
-<aside class="sidebar">
+
+  <!-- SIDEBAR -->
+
+<aside class="sidebar" id="appSidebar">
+
+  <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavigation">
+    <span></span><span></span><span></span>
+  </button>
 
   <div class="brand">
 
@@ -2218,23 +41,19 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
         <span>Technological Institute</span>
         <small>of the Philippines</small>
       </span>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Open navigation menu" aria-controls="mobileMenuPanel" aria-expanded="false">
-        <svg class="menu-toggle-icon menu-toggle-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        <svg class="menu-toggle-icon menu-toggle-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
-      </button>
     </div>
 
-    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
-    <div class="mobile-menu-panel" id="mobileMenuPanel">
+
+
     <div class="menu-label">MAIN MENU</div>
 
 
 
-    <nav class="nav" aria-label="Main menu">
+    <nav class="nav" id="mainNavigation" aria-label="Main menu">
 
       <button class="active" data-page="dashboard">
 
-        <span class="nav-icon nav-icon-dashboard" aria-hidden="true">▦</span> Dashboard
+        <span class="nav-icon">D</span> Dashboard
 
       </button>
 
@@ -2242,7 +61,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
       <button data-page="calculator">
 
-        <span class="nav-icon">▤</span> Calculator
+        <span class="nav-icon">C</span> Calculator
 
       </button>
 
@@ -2250,7 +69,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
       <button data-page="formulas">
 
-        <span class="nav-icon">♧</span> Formulas &amp; Guide
+        <span class="nav-icon">F</span> Formulas &amp; Guide
 
       </button>
 
@@ -2258,13 +77,11 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
       <button data-page="history">
 
-        <span class="nav-icon">◷</span> History
+        <span class="nav-icon">H</span> History
 
       </button>
 
-
-
-    </nav>
+</nav>
 
 
 
@@ -2293,12 +110,18 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
       </button>
 
     </div>
-    </div><!-- /mobile-menu-panel -->
+
   </aside>
 
 
 
+  <!-- MAIN CONTENT -->
+
   <main class="main">
+
+
+
+    <!-- DASHBOARD -->
 
     <section id="dashboard" class="page active">
 
@@ -2306,7 +129,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
         <h1>StatEase Organizational Team</h1>
 
-        <p>Bachelor of Science in Infomarmation System</p>
+        <p>BACHELOR OF SCIENCE IN INFORMATION SYSTEMS</p>
 
       </header>
 
@@ -2332,92 +155,103 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 
 
-      <div class="panel">
-
-        <h2>Enter your data</h2>
-
-
-
-        <div class="field">
-
-          <label for="dataInput">Data values</label>
-
-          <textarea id="dataInput" placeholder="Example: 5, 8, 8, 10, 12"></textarea>
-
-          <div class="hint">Separate numbers using commas, spaces, or new lines.</div>
-
-        </div>
-
-
-
-        <div class="form-row">
-
+      
+      <div class="calculator-tools-grid">
+        <div class="panel calculator-tool-card main-data-card">
+          <h2>Enter your data</h2>
           <div class="field">
-
-            <label for="dataType">Data type</label>
-
-            <select id="dataType">
-
-              <option value="ungrouped">Ungrouped data</option>
-
-              <option value="frequency">Frequency table (value and frequency)</option>
-
-            </select>
-
+            <label for="dataInput">Data values</label>
+            <textarea id="dataInput" tabindex="0" aria-label="Enter dataset values" placeholder="Example: 0.5, 1/2, 25%, -3"></textarea>
+            <div class="hint">Separate each value with a comma or a new line.</div>
           </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="dataType">Data type</label>
+              <select id="dataType">
+                <option value="ungrouped">Ungrouped data</option>
+                <option value="frequency">Frequency table (value and frequency)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="rounding">Decimal places</label>
+              <select id="rounding">
+                <option value="2">2 decimal places</option>
+                <option value="0">Whole number</option>
+                <option value="1">1 decimal place</option>
+                <option value="3">3 decimal places</option>
+                <option value="4">4 decimal places</option>
+                <option value="5">5 decimal places</option>
+                <option value="6">6 decimal places</option>
+                <option value="8">8 decimal places</option>
+              </select>
+            </div>
+          </div>
+          <div id="frequencyHelp" class="hint" style="display:none;margin-bottom:15px">
+            Enter one pair per line: <b>value,frequency</b>. Example: <b>5,3</b> means value 5 appears 3 times. Fractions and percentages are also accepted. Frequency must be a positive whole number.
+          </div>
+          <div class="calculator-actions">
+            <button class="btn" id="calculateBtn" type="button" onclick="try { calculate(); } catch (err) { const box = document.getElementById('errorMessage'); if (box) box.textContent = 'Calculation error: ' + (err && err.message ? err.message : 'Please check your input and try again.'); console.error(err); }">Calculate results</button>
+            <button class="btn secondary" id="clearBtn" type="button">Clear input</button>
+          </div>
+          <p id="errorMessage" style="color:#b02d5f;font-size:13px" role="alert"></p>
+        </div>
 
-
-
+        <div class="panel calculator-tool-card converter-card">
+          <h2>Fraction to Decimal</h2>
+          <p class="hint">Convert one fraction or multiple fractions at once. Separate each value with a comma, space, semicolon, or new line.</p>
           <div class="field">
-
-            <label for="rounding">Decimal places</label>
-
-            <select id="rounding">
-
-              <option value="2">2 decimal places</option>
-
-              <option value="0">Whole number</option>
-
-              <option value="1">1 decimal place</option>
-
-              <option value="3">3 decimal places</option>
-
-              <option value="4">4 decimal places</option>
-
-            </select>
-
+            <label for="fractionInput">Enter fraction dataset(s)</label>
+            <textarea class="converter-input" id="fractionInput" rows="3" placeholder="Examples: 1/2, 1/4, 3/4&#10;Or enter one: 1/2"></textarea>
           </div>
-
+          <button class="btn converter-button" id="fractionConvertBtn" type="button">Convert to Decimal</button>
+          <div class="field converter-output-field">
+            <label>Decimal result</label>
+            <div class="converter-result" id="fractionResult" aria-live="polite">—</div>
+            <p class="hint" id="fractionCalculation">Your calculation will appear here.</p>
+          </div>
+          <p class="converter-error" id="fractionError" role="alert"></p>
         </div>
 
-
-
-        <div id="frequencyHelp" class="hint" style="display:none;margin-bottom:15px">
-
-          For frequency data, enter one value per line as <b>value,frequency</b>.
-
-          Example: 5,2
-
+        <div class="panel calculator-tool-card converter-card">
+          <h2>Percentage to Decimal</h2>
+          <p class="hint">Convert one percentage or multiple percentages at once. Separate each value with a comma, space, semicolon, or new line.</p>
+          <div class="field">
+            <label for="percentageInput">Enter percentage dataset(s)</label>
+            <textarea class="converter-input" id="percentageInput" rows="3" placeholder="Examples: 25%, 50%, 12.5%&#10;Or enter one: 25%"></textarea>
+          </div>
+          <button class="btn converter-button" id="percentageConvertBtn" type="button">Convert to Decimal</button>
+          <div class="field converter-output-field">
+            <label>Decimal result</label>
+            <div class="converter-result" id="percentageResult" aria-live="polite">—</div>
+            <p class="hint" id="percentageCalculation">Your calculation will appear here.</p>
+          </div>
+          <p class="converter-error" id="percentageError" role="alert"></p>
         </div>
-
-
-
-        <button class="btn" id="calculateBtn">Calculate results</button>
-
-        <button class="btn secondary" id="clearBtn" type="button">Clear</button>
-
-        <p id="errorMessage" style="color:#b02d5f;font-size:13px"></p>
-
       </div>
-
 
 
       <div id="resultSection" style="display:none">
 
-        <div class="panel">
+        <div class="panel result-summary-panel">
 
-          <h2>Your results</h2>
-
+          <div class="results-heading-row">
+            <h2>Your results</h2>
+            <button class="btn print-btn" id="printResultsBtn" type="button" onclick="window.print();" title="Opens the print dialog. Choose Save as PDF as the destination." style="position:relative;z-index:99999;pointer-events:auto;cursor:pointer;">Save as PDF</button>
+          </div>
+          <p class="data-count-summary" id="dataCountSummary" aria-live="polite">Data count (n): —</p>
+          <div class="print-only print-report-header" aria-hidden="true">
+            <div class="print-report-brand">
+              <span class="print-brand-mark">Σ</span>
+              <span class="print-brand-copy">
+                <strong>StatEase</strong>
+                <small>Central Tendency Calculator</small>
+              </span>
+            </div>
+            <div class="print-report-meta">
+              <strong>RESULTS REPORT</strong>
+              <span>Prepared: <span id="printGeneratedAt">On print</span></span>
+            </div>
+          </div>
           <div class="results" id="results"></div>
 
         </div>
@@ -2439,6 +273,33 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
         </div>
 
 
+
+        <div class="panel">
+
+          <h2>Interpretation</h2>
+
+          <p id="interpretation" style="font-size:14px;line-height:1.8;margin:0"></p>
+
+        </div>
+
+
+
+        <div class="panel chart-panel">
+          <h2>Data Visualization</h2>
+          <p class="chart-description">Choose how you want to view the frequency distribution of your data.</p>
+          <div class="chart-toolbar">
+            <label for="chartType">Chart type</label>
+            <select id="chartType">
+              <option value="bar">Bar Chart</option>
+              <option value="column">Column Chart</option>
+              <option value="pie">Pie Chart</option>
+              <option value="doughnut">Doughnut Chart</option>
+              <option value="line">Line Graph</option>
+            </select>
+          </div>
+          <div id="chartVisual" class="chart-visual" role="img" aria-label="Selected data visualization"></div>
+          <p id="chartNote" class="hint"></p>
+        </div>
 
         <div class="panel">
 
@@ -2471,6 +332,10 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
       </div>
 
     </section>
+
+
+
+    <!-- FORMULAS -->
 
     <section id="formulas" class="page">
 
@@ -2548,27 +413,82 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 
 
-        <div class="formula">
+        <div class="formula guide-card">
+          <h3>How to enter your dataset</h3>
+          <ol class="guide-steps">
+            <li>Open <strong>Calculator</strong> and select <strong>Ungrouped data</strong> for a regular list of observations.</li>
+            <li>Enter one value at a time. Separate values with commas, spaces, semicolons, or new lines.</li>
+            <li>Choose the number of decimal places for displaying your answers.</li>
+            <li>Click <strong>Calculate results</strong>. Review the mean, median, mode, range, solution, frequency table, and chart.</li>
+          </ol>
+        </div>
 
-          <h3>How to use StatEase</h3>
+        <div class="formula guide-card">
+          <h3>Accepted dataset formats</h3>
+          <div class="guide-format-grid">
+            <div class="guide-format"><strong>Whole and decimal numbers</strong><code>4, 0.1, 2.75, 10</code></div>
+            <div class="guide-format"><strong>Positive and negative numbers</strong><code>-5, -2, 0, 3, 6</code></div>
+            <div class="guide-format"><strong>Fractions</strong><code>1/2, 1/4, 3/4</code><small>Fractions are converted to decimal values for calculation.</small></div>
+            <div class="guide-format"><strong>Percentages</strong><code>10%, 25%, 12.5%</code><small>Percentages are divided by 100 before calculation.</small></div>
+            <div class="guide-format guide-format-wide"><strong>Mixed formats in one dataset</strong><code>1/2, 0.75, 25%, -1.5, 2</code><small>You may combine whole numbers, decimals, fractions, percentages, and negative values in the same ungrouped dataset.</small></div>
+          </div>
+          <p class="guide-note"><strong>Important:</strong> Use a period for decimal points (for example, <code>2.5</code>). Do not use commas inside a single number because commas separate data values.</p>
+        </div>
 
-          <p>
-
-            1. Open Calculator.<br>
-
-            2. Type your data values.<br>
-
-            3. Choose the data type and decimal places.<br>
-
-            4. Select Calculate results.<br>
-
-            5. Read the results and solution below.
-
-          </p>
-
+        <div class="formula guide-card">
+          <h3>How to enter a frequency table</h3>
+          <ol class="guide-steps">
+            <li>Choose <strong>Frequency table (value and frequency)</strong> under Data type.</li>
+            <li>Enter one value-frequency pair on each line, using <code>value,frequency</code>.</li>
+            <li>The value may be a whole number, decimal, fraction, or percentage. The frequency must be a positive whole number.</li>
+          </ol>
+          <div class="guide-format"><strong>Example</strong><code>1/2, 3<br>0.75, 2<br>25%, 4</code></div>
         </div>
 
       </div>
+
+      <section class="limitations-panel" aria-labelledby="limitationsTitle">
+        <div class="limitations-heading">
+          <span class="limitations-mark" aria-hidden="true">i</span>
+          <div>
+            <h2 id="limitationsTitle">System Limitations</h2>
+            <p>Important boundaries and special cases to know when using the calculator.</p>
+          </div>
+        </div>
+        <div class="limitations-grid">
+          <article class="limitation-item">
+            <h3>Calculation limit</h3>
+            <ul>
+              <li>A calculation can contain up to <strong>10,000 observations</strong>, including expanded frequencies.</li>
+              <li>Values must be valid finite numbers. Fractions cannot have a zero denominator.</li>
+            </ul>
+          </article>
+          <article class="limitation-item">
+            <h3>Frequency-table rules</h3>
+            <ul>
+              <li>Each row must contain one value and one frequency.</li>
+              <li>Frequency must be a positive whole number. Zero, negative, and fractional frequencies are not accepted.</li>
+            </ul>
+          </article>
+          <article class="limitation-item">
+            <h3>Mode special cases</h3>
+            <ul>
+              <li><strong>No mode:</strong> every distinct value occurs once.</li>
+              <li><strong>Multiple modes:</strong> all values tied for the highest frequency are reported.</li>
+              <li>A dataset with one observation has no mode unless the value is repeated in a larger dataset.</li>
+            </ul>
+          </article>
+          <article class="limitation-item">
+            <h3>What the system calculates</h3>
+            <ul>
+              <li>Mean, median, mode, range, sorted data, frequency distribution, and data visualization.</li>
+              <li>The chart displays up to 20 distinct values at a time.</li>
+              <li>Variance, standard deviation, and other advanced statistical tests are not included.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      </section>
 
     </section>
 
@@ -2582,7 +502,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
         <h1>Calculation History</h1>
 
-        <p>Your recent calculations are saved in this browser and remain after reload.</p>
+        <p>Review past results, check when each calculation was taken, or open a detailed preview.</p>
 
       </header>
 
@@ -2591,12 +511,23 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
       <div class="panel">
 
         <div id="historyList" class="history-empty">
-
           No calculations yet. Complete a calculation to see it here.
-
         </div>
 
-
+        <dialog id="historyPreviewDialog" class="history-preview-dialog" aria-labelledby="historyPreviewTitle">
+          <div class="history-preview-header">
+            <div>
+              <span class="history-preview-kicker">SAVED CALCULATION</span>
+              <h2 id="historyPreviewTitle">Calculation preview</h2>
+              <p id="historyPreviewMeta"></p>
+            </div>
+            <button class="history-preview-close" id="closeHistoryPreviewBtn" type="button" aria-label="Close preview">×</button>
+          </div>
+          <div id="historyPreviewBody" class="history-preview-body"></div>
+          <div class="history-preview-footer">
+            <button class="btn secondary" id="closeHistoryPreviewFooterBtn" type="button">Close preview</button>
+          </div>
+        </dialog>
 
         <button class="btn secondary" id="clearHistoryBtn" style="margin-top:14px">
 
@@ -2608,830 +539,13 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
     </section>
 
-
-    <section id="settings" class="page">
-
-      <header class="page-head">
-
-        <h1>Settings</h1>
-
-        <p>Personalize your StatEase experience.</p>
-
-      </header>
-
-
-
-      <div class="panel">
-
-        <div class="setting-row">
-
-          <div>
-
-            <b>Show solution steps</b>
-
-            <p>Show the calculation explanation with each result.</p>
-
-          </div>
-
-          <input id="showSolutionSetting" type="checkbox" checked>
-
-        </div>
-
-
-
-        <div class="setting-row">
-
-          <div>
-
-            <b>Show frequency table</b>
-
-            <p>Display each unique value and its frequency.</p>
-
-          </div>
-
-          <input id="showFrequencySetting" type="checkbox" checked>
-
-        </div>
-
-
-
-        <div class="setting-row">
-
-          <div>
-
-            <b>Team profile labels</b>
-
-            <p>Change the member names in the code.</p>
-
-          </div>
-
-          <button class="btn secondary" id="editTeamBtn">Edit team</button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-  </main>
+</main>
 
 </div>
 
 
 
-<script>
-
-const TEAM_MEMBERS = [
-
-  {
-  name: "Lady Ann A. Ermita",
-  role: "Team Leader",
-  image: "./images/member1.jpg"
-},
-{
-  name: "Monica Gaile H. Meriel",
-  role: "Team Member",
-  image: "./images/member2.jpg"
-},
-{
-  name: "Maria Paula M. Gosorpe",
-  role: "Team Member",
-  image: "./images/member3.jpg"
-},
-{
-  name: "Mark Niel Q. Raganit",
-  role: "Team Member",
-  image: "./images/member4.jpg"
-},
-{
-  name: "Earl Cymhon M. Ciruela",
-  role: "Team Member",
-  image: "./images/member5.jpg"
-},
-{
-  name: "Hardion King B. Parone",
-  role: "Team Member",
-  image: "./images/member6.jpg"
-},
-{
-  name: "Maryll Joy A. Hita",
-  role: "Team Member",
-  image: "./images/member7.jpg"
-},
-{
-  name: "Mark Ralph Lauren R. Macapas",
-  role: "Team Member",
-  image: "./images/member8.jpg"
-},
-];
-
-const personSvg = `
-
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-
-stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-
-  <circle cx="12" cy="7.5" r="3.4"></circle>
-
-  <path d="M4.8 20c.6-4.1 3.3-6.3 7.2-6.3s6.6 2.2 7.2 6.3"></path>
-
-</svg>`;
-
-
-
-const teamGrid = document.getElementById("teamGrid");
-teamGrid.classList.add("org-chart");
-
-function makeMemberCard(member, isLeader = false) {
-  const card = document.createElement("article");
-  card.className = "member-card" + (isLeader ? " leader-card" : "");
-
-  const avatar = document.createElement("div");
-  avatar.className = "avatar";
-  if (member.image) {
-    const img = document.createElement("img");
-    img.src = member.image;
-    img.alt = member.name + " profile picture";
-    img.loading = "eager";
-    avatar.appendChild(img);
-  } else {
-    avatar.innerHTML = personSvg;
-  }
-
-  const info = document.createElement("div");
-  info.className = "member-info";
-  if (isLeader) {
-    const kicker = document.createElement("p");
-    kicker.className = "leader-kicker";
-    info.appendChild(kicker);
-  }
-
-  const name = document.createElement("div");
-  name.className = "member-name";
-  name.textContent = member.name;
-
-  const role = document.createElement("div");
-  role.className = "member-role";
-  role.textContent = member.role;
-
-  info.append(name, role);
-  card.append(avatar, info);
-  return card;
-}
-
-teamGrid.replaceChildren();
-const leaderWrap = document.createElement("div");
-leaderWrap.className = "leader-wrap";
-leaderWrap.appendChild(makeMemberCard(TEAM_MEMBERS[0], true));
-teamGrid.appendChild(leaderWrap);
-
-const membersArea = document.createElement("section");
-membersArea.className = "members-area";
-membersArea.setAttribute("aria-label", "Team members");
-const membersHeading = document.createElement("div");
-membersHeading.className = "members-heading";
-const membersTitle = document.createElement("strong");
-membersTitle.textContent = "The team";
-const membersCount = document.createElement("span");
-membersCount.className = "members-count";
-membersCount.textContent = (TEAM_MEMBERS.length - 1) + " members";
-membersHeading.append(membersTitle, membersCount);
-membersArea.appendChild(membersHeading);
-
-const firstRow = document.createElement("div");
-firstRow.className = "member-grid member-grid--three";
-TEAM_MEMBERS.slice(1, 4).forEach(member => firstRow.appendChild(makeMemberCard(member)));
-membersArea.appendChild(firstRow);
-
-const secondRow = document.createElement("div");
-secondRow.className = "member-grid member-grid--four";
-TEAM_MEMBERS.slice(4, 8).forEach(member => secondRow.appendChild(makeMemberCard(member)));
-membersArea.appendChild(secondRow);
-teamGrid.appendChild(membersArea);
-
-document.querySelectorAll(".nav button").forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    document.querySelectorAll(".nav button").forEach(item => {
-
-      item.classList.toggle("active", item === button);
-
-    });
-
-
-
-    document.querySelectorAll(".page").forEach(page => {
-
-      page.classList.toggle("active", page.id === button.dataset.page);
-
-    });
-
-
-
-    const mainContent = document.querySelector(".main");
-    if (mainContent) mainContent.scrollTo({ top: 0, behavior: "auto" });
-    window.scrollTo({ top: 0, behavior: "auto" });
-    closeMobileMenu();
-    saveAppState();
-
-  });
-
-});
-
-const sidebarElement = document.querySelector(".sidebar");
-const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-const mobileMenuBackdrop = document.getElementById("mobileMenuBackdrop");
-
-function closeMobileMenu() {
-  if (!sidebarElement || !mobileMenuToggle) return;
-  sidebarElement.classList.remove("mobile-menu-open");
-  document.body.classList.remove("mobile-menu-active");
-  mobileMenuToggle.setAttribute("aria-expanded", "false");
-  mobileMenuToggle.setAttribute("aria-label", "Open navigation menu");
-}
-
-if (sidebarElement && mobileMenuToggle && mobileMenuBackdrop) {
-  mobileMenuToggle.addEventListener("click", () => {
-    const willOpen = !sidebarElement.classList.contains("mobile-menu-open");
-    sidebarElement.classList.toggle("mobile-menu-open", willOpen);
-    document.body.classList.toggle("mobile-menu-active", willOpen);
-    mobileMenuToggle.setAttribute("aria-expanded", String(willOpen));
-    mobileMenuToggle.setAttribute("aria-label", willOpen ? "Close navigation menu" : "Open navigation menu");
-  });
-  mobileMenuBackdrop.addEventListener("click", closeMobileMenu);
-  document.addEventListener("keydown", event => { if (event.key === "Escape") closeMobileMenu(); });
-  window.addEventListener("resize", () => { if (window.innerWidth > 780) closeMobileMenu(); });
-}
-
-const dataInput = document.getElementById("dataInput");
-
-const dataType = document.getElementById("dataType");
-
-
-
-dataType.addEventListener("change", () => {
-  document.getElementById("frequencyHelp").style.display =
-    dataType.value === "frequency" ? "block" : "none";
-  saveAppState();
-});
-
-
-
-let historyItems = [];
-
-const APP_STORAGE_KEY = "statease_mstip_app_state_v1";
-
-function saveAppState() {
-  try {
-    const activePage = document.querySelector(".page.active");
-    const resultSection = document.getElementById("resultSection");
-    const state = {
-      currentPage: activePage ? activePage.id : "dashboard",
-      dataInput: dataInput.value,
-      dataType: dataType.value,
-      rounding: document.getElementById("rounding").value,
-      showSolution: document.getElementById("showSolutionSetting").checked,
-      showFrequency: document.getElementById("showFrequencySetting").checked,
-      historyItems: historyItems.slice(0, 20),
-      results: {
-        visible: resultSection.style.display !== "none",
-        resultsHtml: document.getElementById("results").innerHTML,
-        sortedData: document.getElementById("sortedData").textContent,
-        solutionHtml: document.getElementById("solution").innerHTML,
-        frequencyTableHtml: document.getElementById("frequencyTable").innerHTML
-      }
-    };
-    localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(state));
-  } catch (error) {
-    console.warn("StatEase could not save state in this browser.", error);
-  }
-}
-
-function restoreAppState() {
-  try {
-    const raw = localStorage.getItem(APP_STORAGE_KEY);
-    if (!raw) return;
-    const state = JSON.parse(raw);
-    if (!state || typeof state !== "object") return;
-
-    if (typeof state.dataInput === "string") dataInput.value = state.dataInput;
-    if (["ungrouped", "frequency"].includes(state.dataType)) dataType.value = state.dataType;
-    if (["0", "1", "2", "3", "4"].includes(String(state.rounding))) {
-      document.getElementById("rounding").value = String(state.rounding);
-    }
-    if (typeof state.showSolution === "boolean") {
-      document.getElementById("showSolutionSetting").checked = state.showSolution;
-    }
-    if (typeof state.showFrequency === "boolean") {
-      document.getElementById("showFrequencySetting").checked = state.showFrequency;
-    }
-
-    const targetPage = document.getElementById(state.currentPage);
-    if (targetPage && targetPage.classList.contains("page")) {
-      document.querySelectorAll(".page").forEach(page => {
-        page.classList.toggle("active", page === targetPage);
-      });
-      document.querySelectorAll(".nav button").forEach(button => {
-        button.classList.toggle("active", button.dataset.page === state.currentPage);
-      });
-    }
-
-    historyItems = Array.isArray(state.historyItems) ? state.historyItems.slice(0, 20) : [];
-    renderHistory();
-
-    if (state.results && typeof state.results === "object") {
-      document.getElementById("results").innerHTML = state.results.resultsHtml || "";
-      document.getElementById("sortedData").textContent = state.results.sortedData || "";
-      document.getElementById("solution").innerHTML = state.results.solutionHtml || "";
-      document.getElementById("frequencyTable").innerHTML = state.results.frequencyTableHtml || "";
-      document.getElementById("resultSection").style.display = state.results.visible ? "block" : "none";
-    }
-
-    document.getElementById("frequencyHelp").style.display =
-      dataType.value === "frequency" ? "block" : "none";
-    const solution = document.getElementById("solution");
-    solution.parentElement.style.display = document.getElementById("showSolutionSetting").checked ? "" : "none";
-    document.getElementById("frequencyTable").closest(".panel").style.display =
-      document.getElementById("showFrequencySetting").checked ? "" : "none";
-  } catch (error) {
-    console.warn("StatEase could not restore saved state.", error);
-  }
-}
-
-function formatNumber(number, places) {
-
-  return Number(number.toFixed(places)).toLocaleString(undefined, {
-
-    maximumFractionDigits: places,
-
-    minimumFractionDigits: places
-
-  });
-
-}
-
-// Sorted data should not force trailing .00 on whole numbers.
-function formatDataValue(number) {
-  if (Number.isInteger(number)) return number.toLocaleString();
-  return Number(number.toFixed(10)).toLocaleString(undefined, { maximumFractionDigits: 10 });
-}
-
-
-
-function calculate() {
-
-  const error = document.getElementById("errorMessage");
-
-  error.textContent = "";
-
-
-
-  let pairs = [];
-
-
-
-  if (dataType.value === "frequency") {
-
-    const lines = dataInput.value.trim()
-
-      .split(/[\n;]+/)
-
-      .filter(line => line.trim());
-
-
-
-    for (const line of lines) {
-
-      const parts = line.split(/[,\t ]+/).filter(Boolean);
-
-
-
-      if (parts.length !== 2) {
-
-        error.textContent =
-
-          "Enter each frequency row as value,frequency. Example: 5,2";
-
-        return;
-
-      }
-
-
-
-      const value = Number(parts[0]);
-
-      const freq = Number(parts[1]);
-
-
-
-      if (!Number.isFinite(value) || !Number.isInteger(freq) || freq < 1) {
-
-        error.textContent =
-
-          "Use valid numbers and positive whole-number frequencies.";
-
-        return;
-
-      }
-
-
-
-      pairs.push({value, freq});
-
-    }
-
-  } else {
-
-    const values = dataInput.value.trim()
-
-      .split(/[,\s;]+/)
-
-      .filter(Boolean)
-
-      .map(Number);
-
-
-
-    if (!values.length || values.some(value => !Number.isFinite(value))) {
-
-      error.textContent = "Please enter at least one valid number.";
-
-      return;
-
-    }
-
-
-
-    const counts = new Map();
-
-
-
-    values.forEach(value => {
-
-      counts.set(value, (counts.get(value) || 0) + 1);
-
-    });
-
-
-
-    pairs = [...counts].map(([value, freq]) => ({value, freq}));
-
-  }
-
-
-
-  if (!pairs.length) {
-
-    error.textContent = "Please enter your data first.";
-
-    return;
-
-  }
-
-
-
-  const expanded = [];
-
-
-
-  pairs.forEach(pair => {
-
-    for (let i = 0; i < pair.freq; i++) {
-
-      expanded.push(pair.value);
-
-    }
-
-  });
-
-
-
-  if (expanded.length > 10000) {
-
-    error.textContent = "Please use 10,000 values or fewer.";
-
-    return;
-
-  }
-
-
-
-  expanded.sort((a, b) => a - b);
-
-
-
-  const n = expanded.length;
-
-  const sum = expanded.reduce((a, b) => a + b, 0);
-
-  const mean = sum / n;
-
-
-
-  const median = n % 2
-
-    ? expanded[Math.floor(n / 2)]
-
-    : (expanded[n / 2 - 1] + expanded[n / 2]) / 2;
-
-
-
-  const maxFrequency = Math.max(...pairs.map(pair => pair.freq));
-
-
-
-  const modes = pairs
-
-    .filter(pair => pair.freq === maxFrequency)
-
-    .map(pair => pair.value)
-
-    .sort((a, b) => a - b);
-
-
-
-  const places = Number(document.getElementById("rounding").value);
-
-
-
-  const modeText = maxFrequency === 1
-
-    ? "No mode"
-
-    : modes.map(value => formatNumber(value, places)).join(", ");
-
-  document.getElementById("results").innerHTML = [
-
-    ["Mean", formatNumber(mean, places), "Sum ÷ number of values"],
-
-    ["Median", formatNumber(median, places), "Middle value of sorted data"],
-
-    ["Mode", modeText, maxFrequency === 1
-
-      ? "All values occur once"
-
-      : "Highest frequency: " + maxFrequency]
-
-  ].map(item => `
-
-    <div class="result-card">
-
-      <span>${item[0]}</span>
-
-      <strong>${item[1]}</strong>
-
-      <p>${item[2]}</p>
-
-    </div>
-
-  `).join("");
-
-
-
-  document.getElementById("sortedData").textContent =
-
-    expanded.map(value => formatDataValue(value)).join(", ");
-
-
-  let medianExplanation;
-
-
-
-  if (n % 2 === 1) {
-
-    medianExplanation =
-
-      "The middle position is " + (Math.floor(n / 2) + 1) +
-
-      ", so the median is " + formatNumber(median, places);
-
-  } else {
-
-    medianExplanation =
-
-      "Average the two middle values " +
-
-      formatNumber(expanded[n / 2 - 1], places) + " and " +
-
-      formatNumber(expanded[n / 2], places) +
-
-      ", giving " + formatNumber(median, places);
-
-  }
-
-
-
-  const solution = document.getElementById("solution");
-
-
-
-  solution.innerHTML = `
-
-    <p><b>Step 1 — Count (n):</b> ${n} value(s)</p>
-
-    <p><b>Step 2 — Mean:</b> ${formatNumber(sum, places)} ÷ ${n}
-
-      = <b>${formatNumber(mean, places)}</b></p>
-
-    <p><b>Step 3 — Median:</b> ${medianExplanation}.</p>
-
-    <p><b>Step 4 — Mode:</b>
-
-      ${modeText === "No mode"
-
-        ? "Every value occurs once, so there is no mode."
-
-        : "The most frequent value(s) are " + modeText + "."}
-
-    </p>
-
-  `;
-
-
-
-  solution.parentElement.style.display =
-
-    document.getElementById("showSolutionSetting").checked ? "" : "none";
-
-  document.getElementById("frequencyTable").innerHTML =
-
-    [...pairs].sort((a, b) => a.value - b.value).map(pair => `
-
-      <tr>
-
-        <td>${formatNumber(pair.value, places)}</td>
-
-        <td>${pair.freq}</td>
-
-      </tr>
-
-    `).join("");
-
-
-
-  document.getElementById("frequencyTable").closest(".panel").style.display =
-
-    document.getElementById("showFrequencySetting").checked ? "" : "none";
-
-
-
-  document.getElementById("resultSection").style.display = "block";
-
-
-
-  historyItems.unshift({
-    n,
-    mean: formatNumber(mean, places),
-    median: formatNumber(median, places),
-    mode: modeText,
-    input: dataInput.value.trim(),
-    time: new Date().toLocaleTimeString()
-  });
-  // Keep a recent history so browser storage stays within safe limits.
-  historyItems = historyItems.slice(0, 20);
-  renderHistory();
-  saveAppState();
-
-}
-
-function escapeHTML(text) {
-
-  return text.replace(/[&<>"']/g, char => ({
-
-    "&": "&amp;",
-
-    "<": "&lt;",
-
-    ">": "&gt;",
-
-    '"': "&quot;",
-
-    "'": "&#39;"
-
-  }[char]));
-
-}
-
-
-
-function renderHistory() {
-
-  const historyList = document.getElementById("historyList");
-
-
-
-  if (!historyItems.length) {
-
-    historyList.className = "history-empty";
-
-    historyList.textContent =
-
-      "No calculations yet. Complete a calculation to see it here.";
-
-    return;
-
-  }
-
-
-
-  historyList.className = "";
-
-
-
-  historyList.innerHTML = historyItems.map((item, index) => `
-
-    <div class="history-item">
-
-      <strong>Calculation ${historyItems.length - index}</strong>
-
-      <small>${item.time} · ${item.n} values</small>
-
-      <p style="font-size:13px">
-
-        Mean: <b>${item.mean}</b> ·
-
-        Median: <b>${item.median}</b> ·
-
-        Mode: <b>${item.mode}</b>
-
-      </p>
-
-      <small>Data: ${escapeHTML(item.input)}</small>
-
-    </div>
-
-  `).join("");
-
-}
-
-
-document.getElementById("calculateBtn")
-
-  .addEventListener("click", calculate);
-
-
-
-document.getElementById("clearBtn").addEventListener("click", () => {
-  dataInput.value = "";
-  document.getElementById("errorMessage").textContent = "";
-  document.getElementById("resultSection").style.display = "none";
-  saveAppState();
-});
-
-
-
-document.getElementById("clearHistoryBtn").addEventListener("click", () => {
-  historyItems = [];
-  renderHistory();
-  saveAppState();
-});
-
-
-
-document.getElementById("showSolutionSetting").addEventListener("change", event => {
-  if (document.getElementById("resultSection").style.display !== "none") {
-    document.getElementById("solution").parentElement.style.display = event.target.checked ? "" : "none";
-  }
-  saveAppState();
-});
-
-
-
-document.getElementById("showFrequencySetting").addEventListener("change", event => {
-  document.getElementById("frequencyTable").closest(".panel").style.display = event.target.checked ? "" : "none";
-  saveAppState();
-});
-
-
-
-document.getElementById("editTeamBtn").addEventListener("click", () => {
-
-  alert(
-
-    "Find TEAM_MEMBERS near the top of this JavaScript code. " +
-
-    "Replace Member 1–8 with your members' names and roles."
-
-  );
-
-});
-
-
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  const confirmLogout = confirm("Are you sure you want to log out?");
-  if (confirmLogout) alert("You have been logged out.");
-});
-
-// Save form changes immediately; reload restores the page, input, results and history.
-dataInput.addEventListener("input", saveAppState);
-document.getElementById("rounding").addEventListener("change", saveAppState);
-
-restoreAppState();
-
-</script>
+<script src="script.js" defer></script>
 
 </body>
 
